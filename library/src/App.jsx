@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
 import Books from "./pages/Books";
 import Reader from "./pages/Reader";
@@ -13,7 +14,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/books" element={<Books />} />
         <Route path="/readers" element={<Reader />} />
         <Route path="/categorys" element={<Category />} />

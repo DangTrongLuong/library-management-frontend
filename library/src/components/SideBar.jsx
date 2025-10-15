@@ -26,7 +26,7 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
       icon: Home,
       label: "Trang chủ",
       hasSubmenu: true,
-      path: "/",
+      path: "/dashboard",
     },
     { id: "sach", icon: Book, label: "Sách", hasSubmenu: true, path: "/books" },
     {

@@ -10,7 +10,7 @@ const Librarian = () => {
 
   useEffect(() => {
     const pathToItem = {
-      "/": "trang-chu",
+      "/dashboard": "trang-chu",
       "/books": "sach",
       "/readers": "doc-gia",
       "/categorys": "the-loai",

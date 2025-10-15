@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import "../styles/Books.css";
 
 const Books = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("sach");
@@ -10,7 +11,7 @@ const Books = () => {
 
   useEffect(() => {
     const pathToItem = {
-      "/": "trang-chu",
+      "/dashboard": "trang-chu",
       "/books": "sach",
       "/readers": "doc-gia",
       "/categorys": "the-loai",
