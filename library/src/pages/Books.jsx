@@ -1,55 +1,46 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import NavBar from "../components/NavBar";
-import SideBar from "../components/SideBar";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Books = () => {
-  const [activeMenuItem, setActiveMenuItem] = useState("sach");
-  const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const pathToItem = {
-      "/": "trang-chu",
-      "/books": "sach",
-      "/readers": "doc-gia",
-      "/categorys": "the-loai",
-      "/librarians": "thu-thu",
-      "/borrows": "muon-tra",
-      "/penalties": "phat",
-      "/reports": "bao-cao",
-    };
-    setActiveMenuItem(pathToItem[location.pathname] || "trang-chu");
-  }, [location.pathname]);
-
-  const handleMenuClick = (itemId) => {
-    setActiveMenuItem(itemId);
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
+    fetch("http://localhost:8081/api/books")
+      .then((res) => res.json())
+      .then((data) => setBooks(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
-    <div className="my-project-container">
-      <NavBar userName="Admin" onToggleSidebar={toggleSidebar} />
-
-      <div className="main-layout">
-        <SideBar
-          activeItem={activeMenuItem}
-          onItemClick={handleMenuClick}
-          isOpen={sidebarOpen}
-          onClose={closeSidebar}
-        />
-
-        <main className="main-content">
-          Mọi người code chức năng sách trong thẻ Main nhé
-        </main>
-      </div>
+    <div>
+      <h2>Danh sách sách</h2>
+      <table border="1" cellPadding="10">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Thể loại</th>
+            <th>Số lượng</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((book) => (
+            <tr key={book.id}>
+              <td>{book.id}</td>
+              <td>{book.title}</td>
+              <td>{book.author}</td>
+              <td>{book.category}</td>
+              <td>{book.quantity}</td>
+              <td>
+                <button onClick={() => navigate(`/books/edit/${book.id}`)}>Sửa</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
