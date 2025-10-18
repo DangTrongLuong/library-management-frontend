@@ -23,56 +23,56 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
 
   const menuItems = [
     {
-      id: "trang-chu",
+      id: "home",
       icon: Home,
       label: "Home",
       hasSubmenu: true,
       path: "/",
     },
     {
-      id: "sach",
+      id: "books",
       icon: Book,
       label: "Books",
       hasSubmenu: true,
       path: "/books",
     },
     {
-      id: "doc-gia",
+      id: "readers",
       icon: User,
       label: "Reader",
       hasSubmenu: true,
       path: "/readers",
     },
     {
-      id: "the-loai",
+      id: "category",
       icon: FolderOpen,
       label: "Category",
       hasSubmenu: true,
       path: "/categorys",
     },
     {
-      id: "thu-thu",
+      id: "librarians",
       icon: User,
       label: "Librarian",
       hasSubmenu: true,
       path: "/librarians",
     },
     {
-      id: "muon-tra",
+      id: "borrows",
       icon: Package,
       label: "Borrow",
       hasSubmenu: true,
       path: "/borrows",
     },
     {
-      id: "phat",
+      id: "penalties",
       icon: Mail,
       label: "Fine",
       hasSubmenu: true,
       path: "/penalties",
     },
     {
-      id: "bao-cao",
+      id: "reports",
       icon: BarChart3,
       label: "Report",
       hasSubmenu: true,
@@ -168,7 +168,7 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
         <div className="btn-logout">
           <button className="logout-btn" onClick={handleLogout}>
             <LogOut size={16} />
-            <span>Đăng xuất</span>
+            <span>Logout</span>
           </button>
         </div>
       </aside>

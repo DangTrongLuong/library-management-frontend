@@ -5,7 +5,7 @@ import { Book, User, Package, BarChart3 } from "lucide-react";
 import "../styles/Dashboard.css";
 
 const Dashboard = ({ setLoading }) => {
-  const [activeMenuItem, setActiveMenuItem] = useState("trang-chu");
+  const [activeMenuItem, setActiveMenuItem] = useState("home");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleMenuClick = (itemId) => {
