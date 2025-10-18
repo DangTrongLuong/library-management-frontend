@@ -1,0 +1,13 @@
+.main-content {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.table img {
+  border-radius: 4px;
+}
+
+.modal.show {
+  background-color: rgba(0, 0, 0, 0.5);
+}
