@@ -4,22 +4,22 @@ import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 
 const Report = () => {
-  const [activeMenuItem, setActiveMenuItem] = useState("bao-cao");
+  const [activeMenuItem, setActiveMenuItem] = useState("reports");
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const pathToItem = {
-      "/": "trang-chu",
-      "/books": "sach",
-      "/readers": "doc-gia",
-      "/categorys": "the-loai",
-      "/librarians": "thu-thu",
-      "/borrows": "muon-tra",
-      "/penalties": "phat",
-      "/reports": "bao-cao",
+      "/": "home",
+      "/books": "books",
+      "/readers": "readers",
+      "/categorys": "category",
+      "/librarians": "librarians",
+      "/borrows": "borrows",
+      "/penalties": "penalties",
+      "/reports": "reports",
     };
-    setActiveMenuItem(pathToItem[location.pathname] || "trang-chu");
+    setActiveMenuItem(pathToItem[location.pathname] || "home");
   }, [location.pathname]);
 
   const handleMenuClick = (itemId) => {

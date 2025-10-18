@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Books from "./pages/Books";
 import Reader from "./pages/Reader";
 import Category from "./pages/Category";
-import Librarian from "./pages/Librarian";
+import Librarian from "./pages/Librarian/Librarian";
 import Borrow from "./pages/Borrow";
 import Fine from "./pages/Fine";
 import Report from "./pages/Report";
