@@ -9,6 +9,7 @@ import {
   BarChart3,
   ChevronRight,
   X,
+  LogOut,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../styles/SideBar.css";
@@ -24,50 +25,56 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
     {
       id: "trang-chu",
       icon: Home,
-      label: "Trang chủ",
+      label: "Home",
       hasSubmenu: true,
       path: "/",
     },
-    { id: "sach", icon: Book, label: "Sách", hasSubmenu: true, path: "/books" },
+    {
+      id: "sach",
+      icon: Book,
+      label: "Books",
+      hasSubmenu: true,
+      path: "/books",
+    },
     {
       id: "doc-gia",
       icon: User,
-      label: "Độc giả",
+      label: "Reader",
       hasSubmenu: true,
       path: "/readers",
     },
     {
       id: "the-loai",
       icon: FolderOpen,
-      label: "Thể loại",
+      label: "Category",
       hasSubmenu: true,
       path: "/categorys",
     },
     {
       id: "thu-thu",
       icon: User,
-      label: "Thủ thư",
+      label: "Librarian",
       hasSubmenu: true,
       path: "/librarians",
     },
     {
       id: "muon-tra",
       icon: Package,
-      label: "Mượn trả",
+      label: "Borrow",
       hasSubmenu: true,
       path: "/borrows",
     },
     {
       id: "phat",
       icon: Mail,
-      label: "Phạt",
+      label: "Fine",
       hasSubmenu: true,
       path: "/penalties",
     },
     {
       id: "bao-cao",
       icon: BarChart3,
-      label: "Báo cáo",
+      label: "Report",
       hasSubmenu: true,
       path: "/reports",
     },
@@ -117,6 +124,10 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
     }
   };
 
+  const handleLogout = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       {isMobile && isOpen && (
@@ -153,6 +164,12 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
               </div>
             );
           })}
+        </div>
+        <div className="btn-logout">
+          <button className="logout-btn" onClick={handleLogout}>
+            <LogOut size={16} />
+            <span>Đăng xuất</span>
+          </button>
         </div>
       </aside>
     </>
