@@ -1,8 +1,5 @@
-main .libraian-management {
+main h1 {
   color: #093765;
-  padding: 0 0 10px 0;
-  border-bottom: 2px solid #e0e0e0;
-  margin-bottom: 20px;
 }
 /* Controls Section */
 .controls {
@@ -56,14 +53,14 @@ main .libraian-management {
 }
 
 .btn-edit-librarian {
-  background-color: #ffc107 !important;
+  background-color: #007bff !important;
   color: white !important;
   margin-right: 5px;
   padding: 4px 8px !important;
 }
 
 .btn-edit-librarian:hover {
-  background-color: #f1b608 !important;
+  background-color: #0056b3 !important;
 }
 
 .btn-delete-librarian {

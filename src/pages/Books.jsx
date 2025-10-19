@@ -15,10 +15,6 @@ const Books = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  // State cho phân trang
-  const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 10;
-
   const [newBook, setNewBook] = useState({
     bookTitle: "",
     author: "",
@@ -56,12 +52,13 @@ const Books = () => {
 
   // Lấy danh sách category
   useEffect(() => {
-    axios.get(`/api/categories`)
-      .then(response => {
-        setCategories(response.data);
-      })
-      .catch(error => console.error("Error fetching categories:", error));
-  }, []);
+  axios.get(`/api/categories`)
+    .then(response => {
+      setCategories(response.data);
+      
+    })
+    .catch(error => console.error("Error fetching categories:", error));
+}, []);
 
   // Thêm sách mới
   const handleAddBook = () => {
@@ -85,72 +82,27 @@ const Books = () => {
   };
 
     // Xóa sách
-const handleDeleteBook = async (id) => {
-  if (window.confirm("Bạn có chắc muốn xóa sách này?")) {
+const handleDeleteBook = async (book) => {
+  if (window.confirm(`Bạn có chắc chắn muốn xóa sách "${book.bookTitle}"?`)) {
     try {
-      const baseURL = import.meta.env.VITE_API_BASE_URL;
-      await axios.delete(`${baseURL}/api/books/${id}`);
-      setBooks(books.filter(book => book.bookId !== id)); // Cập nhật UI
+      const baseUrl = import.meta.env.VITE_API_BASE_URL; // ví dụ: http://localhost:8080
+      const response = await fetch(`${baseUrl}/api/books/${book.bookId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Xóa sách thất bại");
+      }
+
       alert("Xóa sách thành công!");
+      // Cập nhật lại danh sách sách
+      setBooks((prevBooks) => prevBooks.filter((b) => b.bookId !== book.bookId));
     } catch (error) {
-      console.error("Lỗi khi xóa sách:", error);
+      console.error("Đã xảy ra lỗi khi xóa sách:", error);
       alert("Không thể xóa sách!");
     }
   }
 };
-
-
-  // Tính toán số trang
-  const totalPages = Math.ceil(books.length / booksPerPage);
-
-  // Lấy sách của trang hiện tại
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-
-  // Chuyển trang
-  const goToPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const goToPrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  // Tạo array các số trang để hiển thị
-  const getPageNumbers = () => {
-    const pageNumbers = [];
-    const maxPagesToShow = 5; // Hiển thị tối đa 5 nút trang
-
-    if (totalPages <= maxPagesToShow) {
-      // Nếu tổng số trang <= 5, hiển thị tất cả
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-      }
-    } else {
-      // Nếu nhiều hơn 5 trang, hiển thị thông minh
-      if (currentPage <= 3) {
-        // Đang ở đầu
-        pageNumbers.push(1, 2, 3, 4, '...', totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        // Đang ở cuối
-        pageNumbers.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
-      } else {
-        // Đang ở giữa
-        pageNumbers.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
-      }
-    }
-
-    return pageNumbers;
-  };
 
   return (
     <div className="my-project-container">
@@ -173,11 +125,11 @@ const handleDeleteBook = async (id) => {
           <table className="table table-bordered">
             <thead>
               <tr>
-                <th>ID</th><th>Tên sách</th><th>Tác giả</th><th>Năm XB</th><th>NXB</th><th>Số lượng</th><th>Hình ảnh</th><th>Sửa/Xoá</th>
+                <th>ID</th><th>Tên sách</th><th>Tác giả</th><th>Năm XB</th><th>NXB</th><th>Số lượng</th><th>Hình ảnh</th><th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {currentBooks.map(book => (
+              {books.map(book => (
                 <tr key={book.bookId}>
                   <td>{book.bookId}</td>
                   <td>{book.bookTitle}</td>
@@ -198,45 +150,9 @@ const handleDeleteBook = async (id) => {
             </tbody>
           </table>
 
-          {/* Phân trang */}
-          {totalPages > 1 && (
-            <nav aria-label="Page navigation">
-              <ul className="pagination justify-content-center">
-                {/* Nút Previous */}
-                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                  <button className="page-link" onClick={goToPrevPage} disabled={currentPage === 1}>
-                    &laquo; Trước
-                  </button>
-                </li>
-
-                {/* Các nút số trang */}
-                {getPageNumbers().map((pageNum, index) => (
-                  pageNum === '...' ? (
-                    <li key={`ellipsis-${index}`} className="page-item disabled">
-                      <span className="page-link">...</span>
-                    </li>
-                  ) : (
-                    <li key={pageNum} className={`page-item ${currentPage === pageNum ? 'active' : ''}`}>
-                      <button className="page-link" onClick={() => goToPage(pageNum)}>
-                        {pageNum}
-                      </button>
-                    </li>
-                  )
-                ))}
-
-                {/* Nút Next */}
-                <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                  <button className="page-link" onClick={goToNextPage} disabled={currentPage === totalPages}>
-                    Sau &raquo;
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          )}
-
           {/* Modal thêm sách */}
           {showModal && (
-            <div className="modal show d-block" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+            <div className="modal show d-block">
               <div className="modal-dialog">
                 <div className="modal-content p-3">
                   <h5>Thêm sách mới</h5>
@@ -255,7 +171,7 @@ const handleDeleteBook = async (id) => {
                     ))}
                   </select>
 
-                  <button className="btn btn-success" onClick={handleAddBook}>Lưu</button>
+                  <button className="btn btn-success" onClickonClick={handleAddBook}>Lưu</button>
                   <button className="btn btn-secondary ms-2" onClick={() => setShowModal(false)}>Đóng</button>
                 </div>
               </div>
@@ -268,9 +184,3 @@ const handleDeleteBook = async (id) => {
 };
 
 export default Books;
-//mien thi hinh anh
-//goi api xoa 
-// goi api sua 
-// goi api them sach 
-// search 
-// phan trang danh sach sach

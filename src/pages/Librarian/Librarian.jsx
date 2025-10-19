@@ -112,11 +112,11 @@ const Librarian = () => {
   };
 
   const handleAdd = () => {
-    navigate("/librarians/createLibrarian");
+    navigate("/librarians/add");
   };
 
   const handleEdit = (id) => {
-    navigate(`/librarians/editLibrarian/${id}`);
+    navigate(`/librarians/edit/${id}`);
   };
 
   const handleDelete = (id) => {
@@ -195,7 +195,7 @@ const Librarian = () => {
         />
 
         <main className="main-content">
-          <h1 className="libraian-management">Librarian Management</h1>
+          <h1>Librarian Management</h1>
 
           <div className="controls">
             <input
