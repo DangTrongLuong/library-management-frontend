@@ -7,6 +7,7 @@ import Category from "./pages/Category";
 import Librarian from "./pages/Librarian/Librarian";
 import CreateLibrarian from "./pages/Librarian/CreateLibrarian";
 import EditLibrarian from "./pages/Librarian/EditLibrarian";
+import LibrarianDetail from "./pages/Librarian/DetailLibrarian";
 import Borrow from "./pages/Borrow";
 import Fine from "./pages/Fine";
 import Report from "./pages/Report";
@@ -27,6 +28,10 @@ const App = () => {
         <Route
           path="/librarians/editLibrarian/:id"
           element={<EditLibrarian />}
+        />
+        <Route
+          path="/librarians/detailLibrarian/:id"
+          element={<LibrarianDetail />}
         />
         <Route path="/borrows" element={<Borrow />} />
         <Route path="/penalties" element={<Fine />} />

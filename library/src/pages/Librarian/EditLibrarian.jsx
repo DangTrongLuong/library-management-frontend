@@ -47,7 +47,7 @@ const EditLibrarian = () => {
       "/penalties": "penalties",
       "/reports": "reports",
     };
-    setActiveMenuItem(pathToItem[location.pathname] || "home");
+    setActiveMenuItem(pathToItem[location.pathname] || "librarians");
   }, [location.pathname]);
 
   useEffect(() => {

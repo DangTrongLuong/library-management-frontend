@@ -144,7 +144,7 @@ const Librarian = () => {
   };
 
   const handleDetail = (id) => {
-    navigate(`/librarians/detail/${id}`);
+    navigate(`/librarians/detailLibrarian/${id}`);
   };
 
   const handleMenuClick = (itemId) => {
