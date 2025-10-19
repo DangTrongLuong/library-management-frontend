@@ -81,6 +81,21 @@ const Books = () => {
       .catch(error => console.error(error));
   };
 
+    // Xóa sách
+const handleDeleteBook = async (id) => {
+  if (window.confirm("Bạn có chắc muốn xóa sách này?")) {
+    try {
+      const baseURL = import.meta.env.VITE_API_BASE_URL;
+      await axios.delete(`${baseURL}/api/books/${id}`);
+      setBooks(books.filter(book => book.bookId !== id)); // Cập nhật UI
+      alert("Xóa sách thành công!");
+    } catch (error) {
+      console.error("Lỗi khi xóa sách:", error);
+      alert("Không thể xóa sách!");
+    }
+  }
+};
+
   return (
     <div className="my-project-container">
       <NavBar userName="Admin" onToggleSidebar={toggleSidebar} />
@@ -117,7 +132,10 @@ const Books = () => {
                   <td><img src={book.imageUrl} alt="" width="50" /></td>
                   <td>
                     <button className="btn btn-warning btn-sm">Sửa</button>
-                    <button className="btn btn-danger btn-sm ms-2">Xóa</button>
+                    
+                    <button className="btn btn-danger btn-sm ms-2" onClick={() => handleDeleteBook(book.bookId)}> Xóa
+                    </button>
+
                   </td>
                 </tr>
               ))}
