@@ -1,0 +1,390 @@
+/* Detail Librarian Wrapper */
+.detail-librarian-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.detail-header-librarian {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.detail-librarian-h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+}
+
+.detail-btn-back-librarian {
+  padding: 8px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-btn-back-librarian:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Detail Container */
+.detail-container-librarian {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card Styles */
+.detail-card-librarian {
+  background-color: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.detail-card-librarian:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.detail-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+}
+
+/* Header Card */
+.detail-header-card-librarian {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 30px;
+}
+
+.detail-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.detail-avatar-librarian {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+  border: 3px solid white;
+}
+
+.detail-header-info h2 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.detail-id {
+  margin: 0 0 10px 0;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+.detail-status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.detail-status-active {
+  background-color: rgba(255, 255, 255);
+  color: #28a745;
+}
+
+.detail-status-inactive {
+  background-color: rgba(255, 255, 255);
+  color: #dc3545;
+}
+
+/* Grid Layout */
+.detail-grid-librarian {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.detail-full-width-librarian {
+  grid-column: 1 / -1;
+}
+
+/* Detail Item */
+.detail-item-librarian {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item-librarian label {
+  font-weight: 600;
+  color: #007bff;
+  font-size: 13px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-item-librarian p {
+  margin: 0;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.detail-email {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.detail-email:hover {
+  text-decoration: underline;
+}
+
+.detail-wage {
+  color: #28a745;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.detail-salary {
+  color: #ffc107;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.detail-notes {
+  color: #666;
+  font-style: italic;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-left: 3px solid #007bff;
+  border-radius: 4px;
+}
+
+.detail-meta {
+  color: #999;
+  font-size: 13px;
+}
+
+.detail-status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.detail-status-badge.detail-status-active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.detail-status-badge.detail-status-inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Action Buttons */
+.detail-actions-librarian {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.detail-btn-edit-librarian,
+.detail-btn-back-action-librarian {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.detail-btn-edit-librarian {
+  background-color: #007bff;
+  color: white;
+  min-width: 150px;
+}
+
+.detail-btn-edit-librarian:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.detail-btn-back-action-librarian {
+  background-color: #6c757d;
+  color: white;
+  min-width: 150px;
+}
+
+.detail-btn-back-action-librarian:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Loading & Error States */
+.detail-loading-librarian,
+.detail-error-librarian {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.detail-loading-librarian {
+  color: #666;
+}
+
+.detail-error-librarian {
+  color: #dc3545;
+}
+
+/* Responsive Tablet */
+@media (max-width: 768px) {
+  .detail-librarian-wrapper {
+    padding: 15px;
+  }
+
+  .detail-header-librarian {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .detail-librarian-h1 {
+    font-size: 24px;
+  }
+
+  .detail-card-librarian {
+    padding: 20px;
+  }
+
+  .detail-grid-librarian {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-actions-librarian {
+    flex-direction: column;
+  }
+
+  .detail-btn-edit-librarian,
+  .detail-btn-back-action-librarian {
+    width: 100%;
+  }
+}
+
+/* Responsive Mobile */
+@media (max-width: 480px) {
+  .detail-librarian-wrapper {
+    padding: 10px;
+  }
+
+  .detail-header-librarian {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .detail-librarian-h1 {
+    font-size: 20px;
+  }
+
+  .detail-btn-back-librarian {
+    padding: 6px 10px;
+  }
+
+  .detail-card-librarian {
+    padding: 15px;
+  }
+
+  .detail-header-card-librarian {
+    padding: 20px;
+  }
+
+  .detail-avatar-librarian {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+
+  .detail-header-info h2 {
+    font-size: 18px;
+  }
+
+  .detail-card-title {
+    font-size: 16px;
+  }
+
+  .detail-item-librarian label {
+    font-size: 12px;
+  }
+
+  .detail-item-librarian p {
+    font-size: 14px;
+  }
+
+  .detail-salary {
+    font-size: 16px;
+  }
+
+  .detail-grid-librarian {
+    gap: 15px;
+  }
+
+  .detail-actions-librarian {
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .detail-btn-edit-librarian,
+  .detail-btn-back-action-librarian {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: auto;
+    width: 100%;
+  }
+}
