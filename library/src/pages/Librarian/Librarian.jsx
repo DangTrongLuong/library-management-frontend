@@ -116,7 +116,7 @@ const Librarian = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/librarians/edit/${id}`);
+    navigate(`/librarians/editLibrarian/${id}`);
   };
 
   const handleDelete = (id) => {
