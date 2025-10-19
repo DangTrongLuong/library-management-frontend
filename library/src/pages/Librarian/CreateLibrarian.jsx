@@ -94,6 +94,11 @@ const CreateLibrarian = () => {
     setActiveMenuItem(itemId);
   };
 
+  const getMinDate = () => {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
+  };
+
   return (
     <div className="my-project-container">
       <ToastContainer autoClose={2000} />
@@ -205,6 +210,7 @@ const CreateLibrarian = () => {
                         type="date"
                         value={formData.startDate}
                         onChange={handleChange}
+                        min={getMinDate()}
                         required
                         className="form-input-librarian"
                       />

@@ -56,14 +56,14 @@ main .libraian-management {
 }
 
 .btn-edit-librarian {
-  background-color: #007bff !important;
+  background-color: #ffc107 !important;
   color: white !important;
   margin-right: 5px;
   padding: 4px 8px !important;
 }
 
 .btn-edit-librarian:hover {
-  background-color: #0056b3 !important;
+  background-color: #f1b608 !important;
 }
 
 .btn-delete-librarian {
