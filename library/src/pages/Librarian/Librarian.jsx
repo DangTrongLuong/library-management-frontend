@@ -37,7 +37,7 @@ const Librarian = () => {
       "/penalties": "penalties",
       "/reports": "reports",
     };
-    setActiveMenuItem(pathToItem[location.pathname] || "home");
+    setActiveMenuItem(pathToItem[location.pathname] || "librarians");
   }, [location.pathname]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Librarian = () => {
 
   const fetchLibrarians = async () => {
     try {
-      const response = await axios.get("/api/librarians");
+      const response = await axios.get("/api/librarians/getAllLibrarian");
       setLibrarians(response.data);
       setFilteredLibrarians(response.data);
       setCurrentPage(1);
@@ -126,7 +126,9 @@ const Librarian = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`/api/librarians/${deleteLibrarianId}`);
+      await axios.delete(
+        `/api/librarians/deleteLibrarian/${deleteLibrarianId}`
+      );
       fetchLibrarians();
       setShowDeleteModal(false);
       setDeleteLibrarianId(null);

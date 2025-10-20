@@ -56,7 +56,7 @@ const EditLibrarian = () => {
 
   const fetchLibrarian = async () => {
     try {
-      const response = await axios.get(`/api/librarians/${id}`);
+      const response = await axios.get(`/api/librarians/getLibrarian/${id}`);
       setFormData({
         ...response.data,
         startDate: response.data.startDate
@@ -144,7 +144,7 @@ const EditLibrarian = () => {
     }
 
     try {
-      await axios.put(`/api/librarians/${id}`, {
+      await axios.put(`/api/librarians/updateLibrarian/${id}`, {
         ...formData,
         hourlyWage: parseFloat(formData.hourlyWage),
       });
@@ -152,6 +152,7 @@ const EditLibrarian = () => {
 
       setTimeout(() => {
         navigate("/librarians");
+        S;
       }, 2000);
     } catch (error) {
       console.error("Error updating librarian:", error);
