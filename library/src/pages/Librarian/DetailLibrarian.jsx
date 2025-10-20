@@ -37,7 +37,7 @@ const LibrarianDetail = () => {
 
   const fetchLibrarian = async () => {
     try {
-      const response = await axios.get(`/api/librarians/${id}`);
+      const response = await axios.get(`/api/librarians/getLibrarian/${id}`);
       setLibrarian(response.data);
       setLoading(false);
     } catch (error) {
