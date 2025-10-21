@@ -10,11 +10,13 @@ main .libraian-management {
   gap: 10px;
   margin-bottom: 20px;
   align-items: center;
+  position: sticky;
 }
 
 .search-input-librarian {
   padding: 8px;
   width: 300px;
+  flex: 1;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;

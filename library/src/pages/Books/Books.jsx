@@ -122,7 +122,7 @@ const Books = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/books/updateBook/${id}`);
+    navigate(`/books/editBook/${id}`);
   };
 
   const handleDelete = (id) => {
