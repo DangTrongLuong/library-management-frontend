@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Books from "./pages/Books/Books";
 import CreateBook from "./pages/Books/CreateBook";
-// import UpdateBook from "./pages/Books/UpdateBook";
+import EditBook from "./pages/Books/EditBook";
+import DetailBook from "./pages/Books/BookDetail";
 import Reader from "./pages/Reader";
 import Category from "./pages/Category";
 import Librarian from "./pages/Librarian/Librarian";
@@ -21,7 +22,8 @@ const App = () => {
         <Route path="/" element={<Dashboard />} />
         <Route path="/books" element={<Books />} />
         <Route path="/books/createBook" element={<CreateBook />} />
-        {/* <Route path="/books/updateBook/:id" element={<UpdateBook />} /> */}
+        <Route path="/books/editBook/:id" element={<EditBook />} />
+        <Route path="/books/detailBook/:id" element={<DetailBook />} />
         <Route path="/readers" element={<Reader />} />
         <Route path="/categorys" element={<Category />} />
         <Route path="/librarians" element={<Librarian />} />

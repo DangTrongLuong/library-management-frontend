@@ -18,7 +18,7 @@
 .create-book-h1 {
   margin: 0;
   font-size: 28px;
-  color: #333;
+  color: #093765;
   font-weight: 600;
 }
 
@@ -71,7 +71,7 @@
 .create-book-section h2 {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: #093765;
   margin: 0;
   padding-bottom: 10px;
   border-bottom: 2px solid #007bff;
@@ -113,7 +113,7 @@
 }
 
 .create-book-upload-label span {
-  color: #333;
+  color: #093765;
   font-weight: 500;
   font-size: 16px;
 }
@@ -171,7 +171,7 @@
 
 .create-book-group label {
   font-weight: 500;
-  color: #333;
+  color: #093765;
   font-size: 14px;
 }
 
@@ -194,10 +194,11 @@
   border-color: #007bff;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
   background-color: #f8fbff;
+  color: #093765;
 }
 
 .create-book-input::placeholder {
-  color: #999;
+  color: #093765;
 }
 
 /* Error Styles */
