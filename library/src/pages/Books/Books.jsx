@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import NavBar from "../components/NavBar";
-import SideBar from "../components/SideBar";
+import NavBar from "../../components/NavBar";
+import SideBar from "../../components/SideBar";
 import "../styles/Books.css";
 import axios from "axios";
 
@@ -51,27 +51,30 @@ const Books = () => {
 
   // Load data
   useEffect(() => {
-    axios.get("http://localhost:8080/api/books")
-      .then(res => setBooks(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get("http://localhost:8080/api/books")
+      .then((res) => setBooks(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/categories")
-      .then(res => setCategories(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get("http://localhost:8080/api/categories")
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   // Delete book
   const handleDelete = (id) => {
     if (!window.confirm("Bạn có chắc chắn muốn xóa sách này không?")) return;
 
-    axios.delete(`http://localhost:8080/api/books/${id}`)
+    axios
+      .delete(`http://localhost:8080/api/books/${id}`)
       .then(() => {
-        setBooks(prev => prev.filter(book => book.bookId !== id));
+        setBooks((prev) => prev.filter((book) => book.bookId !== id));
         alert("Đã xoá sách thành công!");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         alert("Xóa thất bại.");
       });
@@ -112,11 +115,15 @@ const Books = () => {
         formData.append("image", newBook.image);
       }
 
-      const res = await axios.post("http://localhost:8080/api/books", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        "http://localhost:8080/api/books",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
-      setBooks(prev => [...prev, res.data]);
+      setBooks((prev) => [...prev, res.data]);
       alert("Thêm sách thành công!");
       setShowModal(false);
     } catch (error) {
@@ -158,8 +165,8 @@ const Books = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
 
-      setBooks(prev =>
-        prev.map(b => (b.bookId === editBook.bookId ? response.data : b))
+      setBooks((prev) =>
+        prev.map((b) => (b.bookId === editBook.bookId ? response.data : b))
       );
 
       alert("Cập nhật sách thành công!");
@@ -173,7 +180,10 @@ const Books = () => {
 
   // Modal
   const renderModal = () => (
-    <div className="modal show d-block" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+    <div
+      className="modal show d-block"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
       <div className="modal-dialog">
         <div className="modal-content p-3">
           <h5>{editBook ? "Sửa thông tin sách" : "Thêm sách mới"}</h5>
@@ -204,7 +214,9 @@ const Books = () => {
             className="form-control mb-2"
             type="number"
             placeholder="Năm xuất bản"
-            value={editBook ? editBook.publicationYear : newBook.publicationYear}
+            value={
+              editBook ? editBook.publicationYear : newBook.publicationYear
+            }
             onChange={(e) =>
               editBook
                 ? setEditBook({ ...editBook, publicationYear: e.target.value })
@@ -246,9 +258,17 @@ const Books = () => {
                 const file = e.target.files[0];
                 if (!file) return;
                 if (editBook) {
-                  setEditBook({ ...editBook, image: file, imageUrl: URL.createObjectURL(file) });
+                  setEditBook({
+                    ...editBook,
+                    image: file,
+                    imageUrl: URL.createObjectURL(file),
+                  });
                 } else {
-                  setNewBook({ ...newBook, image: file, imageUrl: URL.createObjectURL(file) });
+                  setNewBook({
+                    ...newBook,
+                    image: file,
+                    imageUrl: URL.createObjectURL(file),
+                  });
                 }
               }}
             />
