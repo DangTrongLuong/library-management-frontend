@@ -5,7 +5,7 @@ import Books from "./pages/Books/Books";
 import CreateBook from "./pages/Books/CreateBook";
 import EditBook from "./pages/Books/EditBook";
 import DetailBook from "./pages/Books/BookDetail";
-import Reader from "./pages/Reader";
+import Reader from "./pages/Readers/Reader";
 import Category from "./pages/Category";
 import Librarian from "./pages/Librarian/Librarian";
 import CreateLibrarian from "./pages/Librarian/CreateLibrarian";
@@ -14,6 +14,8 @@ import LibrarianDetail from "./pages/Librarian/DetailLibrarian";
 import Borrow from "./pages/Borrow";
 import Fine from "./pages/Fine";
 import Report from "./pages/Report";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App = () => {
   return (

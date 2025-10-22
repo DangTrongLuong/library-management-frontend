@@ -1,11 +1,11 @@
-main .libraian-management {
+main .readers-management {
   color: #093765;
   padding: 0 0 10px 0;
   border-bottom: 2px solid #e0e0e0;
   margin-bottom: 20px;
 }
 /* Controls Section */
-.controls-librarian {
+.controls-readers {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
@@ -13,7 +13,7 @@ main .libraian-management {
   position: sticky;
 }
 
-.search-input-librarian {
+.search-input-readers {
   padding: 8px;
   width: 300px;
   flex: 1;
@@ -23,14 +23,14 @@ main .libraian-management {
   color: #093765;
 }
 
-.search-input-librarian:focus {
+.search-input-readers:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 /* Buttons */
-.btn-action-librarian {
+.btn-action-readers {
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -39,59 +39,59 @@ main .libraian-management {
   transition: all 0.3s ease;
 }
 
-.btn-action-librarian:hover:not(:disabled) {
+.btn-action-readers:hover:not(:disabled) {
   transform: translateY(-2px);
 }
 
-.btn-action-librarian:disabled {
+.btn-action-readers:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.btn-add-librarian {
+.btn-add-readers {
   background-color: #28a745 !important;
   color: white !important;
 }
 
-.btn-add-librarian:hover {
+.btn-add-readers:hover {
   background-color: #218838;
 }
 
-.btn-edit-librarian {
+.btn-edit-readers {
   background-color: #ffc107 !important;
   color: white !important;
   margin-right: 5px;
   padding: 4px 8px !important;
 }
 
-.btn-edit-librarian:hover {
+.btn-edit-readers:hover {
   background-color: #f1b608 !important;
 }
 
-.btn-delete-librarian {
+.btn-delete-readers {
   background-color: #dc3545 !important;
   color: white !important;
   margin-right: 5px;
   padding: 4px 8px !important;
 }
 
-.btn-delete-librarian:hover {
+.btn-delete-readers:hover {
   background-color: #f6061e !important;
 }
 
-.btn-detail-librarian {
+.btn-detail-readers {
   background-color: #17a2b8 !important;
   color: white !important;
   padding: 4px 8px !important;
 }
 
-.btn-detail-librarian:hover {
+.btn-detail-readers:hover {
   background-color: #128294 !important;
 }
 
 /* Table Styles */
 
-.data-table-librarian {
+.data-table-readers {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
@@ -99,11 +99,11 @@ main .libraian-management {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.table-header-librarian {
+.table-header-readers {
   background-color: #f2f2f2;
 }
 
-.table-header-librarian th {
+.table-header-readers th {
   z-index: 100;
   border: 1px solid #ddd;
   background-color: #f2f2f2;
@@ -113,27 +113,27 @@ main .libraian-management {
   color: #093765;
 }
 
-.table-row-librarian {
+.table-row-readers {
   border-bottom: 1px solid #ddd;
 }
 
-.table-row-librarian:hover {
+.table-row-readers:hover {
   background-color: #f9f9f9;
 }
 
-.table-row-librarian td {
+.table-row-readers td {
   border: 1px solid #ddd;
   padding: 12px;
   font-size: 15px;
   color: #093765;
 }
 
-.action-cell-librarian {
+.action-cell-readers {
   display: flex;
   gap: 3px;
 }
 
-.no-data-librarian {
+.no-data-readers {
   text-align: center;
   padding: 30px !important;
   color: #093765;
@@ -141,14 +141,14 @@ main .libraian-management {
 }
 
 /* Pagination Styles */
-.pagination-librarian {
+.pagination-readers {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
 
-.btn-page-librarian {
+.btn-page-readers {
   padding: 8px 12px;
   background-color: #007bff;
   color: white;
@@ -159,17 +159,17 @@ main .libraian-management {
   transition: all 0.3s ease;
 }
 
-.btn-page-librarian:hover:not(:disabled) {
+.btn-page-readers:hover:not(:disabled) {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
 
-.btn-page-librarian:disabled {
+.btn-page-readers:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.page-info-librarian {
+.page-info-readers {
   padding: 8px 16px;
   background-color: #f0f0f0;
   border-radius: 4px;
@@ -180,11 +180,11 @@ main .libraian-management {
 }
 
 /* SORT DROPDOWN */
-.sort-dropdown-container-librarian {
+.sort-dropdown-container-readers {
   position: relative;
 }
 
-.btn-sort-dropdown-librarian {
+.btn-sort-dropdown-readers {
   padding: 10px 16px;
   background-color: #08a5bd !important;
   color: white !important;
@@ -200,21 +200,21 @@ main .libraian-management {
   white-space: nowrap;
 }
 
-.btn-sort-dropdown-librarian:hover {
+.btn-sort-dropdown-readers:hover {
   background-color: #138496;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3);
 }
 
-.dropdown-icon-librarian {
+.dropdown-icon-readers {
   transition: transform 0.3s ease;
 }
 
-.dropdown-icon-librarian.open {
+.dropdown-icon-readers.open {
   transform: rotate(180deg);
 }
 
-.sort-dropdown-menu-librarian {
+.sort-dropdown-menu-readers {
   position: absolute;
   top: 100%;
   left: 0;
@@ -240,7 +240,7 @@ main .libraian-management {
   }
 }
 
-.sort-option-librarian {
+.sort-option-readers {
   width: 100%;
   padding: 12px 16px;
   background-color: white;
@@ -252,27 +252,27 @@ main .libraian-management {
   transition: all 0.2s ease;
 }
 
-.sort-option-librarian:last-child {
+.sort-option-readers:last-child {
   border-bottom: none;
 }
 
-.sort-option-librarian:hover {
+.sort-option-readers:hover {
   background-color: #eeeeee !important;
   padding-left: 20px;
 }
 
-.sort-option-librarian:active {
+.sort-option-readers:active {
   background-color: #e9ecef;
 }
 
-.sort-divider-librarian {
+.sort-divider-readers {
   height: 1px;
   background-color: #e0e0e0;
   margin: 4px 0;
 }
 
 /* Modal Overlay */
-.modal-overlay-librarian {
+.modal-overlay-readers {
   position: fixed;
   top: 0;
   left: 0;
@@ -297,7 +297,7 @@ main .libraian-management {
 }
 
 /* Modal Content */
-.modal-content-librarian {
+.modal-content-readers {
   background-color: white;
   border-radius: 8px;
   padding: 30px;
@@ -319,14 +319,14 @@ main .libraian-management {
   }
 }
 
-.modal-content-librarian h2 {
+.modal-content-readers h2 {
   margin: 0 0 15px 0;
   color: #333;
   font-size: 20px;
   font-weight: 600;
 }
 
-.modal-content-librarian p {
+.modal-content-readers p {
   margin: 0 0 25px 0;
   color: #666;
   font-size: 14px;
@@ -334,14 +334,14 @@ main .libraian-management {
 }
 
 /* Modal Buttons */
-.modal-buttons-librarian {
+.modal-buttons-readers {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
 
-.modal-btn-confirm-librarian,
-.modal-btn-cancel-librarian {
+.modal-btn-confirm-readers,
+.modal-btn-cancel-readers {
   padding: 10px 24px;
   border: none;
   border-radius: 4px;
@@ -351,23 +351,23 @@ main .libraian-management {
   transition: all 0.3s ease;
 }
 
-.modal-btn-confirm-librarian {
+.modal-btn-confirm-readers {
   background-color: #dc3545;
   color: white;
 }
 
-.modal-btn-confirm-librarian:hover {
+.modal-btn-confirm-readers:hover {
   background-color: #c82333;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }
 
-.modal-btn-cancel-librarian {
+.modal-btn-cancel-readers {
   background-color: #6c757d;
   color: white;
 }
 
-.modal-btn-cancel-librarian:hover {
+.modal-btn-cancel-readers:hover {
   background-color: #5a6268;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
@@ -375,12 +375,12 @@ main .libraian-management {
 
 /* Table Footer */
 
-.table-footer-librarian tr {
+.table-footer-readers tr {
   border-top: 2px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
 
-.footer-info-librarian {
+.footer-info-readers {
   padding: 12px !important;
   text-align: left;
   font-weight: 600;
@@ -399,53 +399,53 @@ main .libraian-management {
     gap: 10px;
   }
 
-  .search-input-librarian {
+  .search-input-readers {
     width: 100%;
     padding: 10px;
   }
 
-  .btn-add-librarian {
+  .btn-add-readers {
     width: 100%;
   }
 
-  .data-table-librarian {
+  .data-table-readers {
     font-size: 13px;
   }
 
-  .table-header-librarian th {
+  .table-header-readers th {
     padding: 10px 6px;
     font-size: 12px;
   }
 
-  .table-row-librarian td {
+  .table-row-readers td {
     padding: 10px 6px;
   }
 
-  .action-cell-librarian {
+  .action-cell-readers {
     flex-direction: column;
     gap: 5px;
   }
 
-  .btn-edit-librarian,
-  .btn-delete-librarian,
-  .btn-detail-librarian {
+  .btn-edit-readers,
+  .btn-delete-readers,
+  .btn-detail-readers {
     width: 100%;
     margin: 0;
     padding: 6px 8px;
     font-size: 12px;
   }
 
-  .pagination-librarian {
+  .pagination-readers {
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .btn-page-librarian {
+  .btn-page-readers {
     padding: 6px 10px;
     font-size: 13px;
   }
 
-  .page-info-librarian {
+  .page-info-readers {
     padding: 6px 12px;
     font-size: 13px;
     min-width: auto;
@@ -474,21 +474,21 @@ main .libraian-management {
     padding: 0 5px;
   }
 
-  .search-input-librarian {
+  .search-input-readers {
     width: 100%;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ddd;
   }
 
-  .btn-add-librarian {
+  .btn-add-readers {
     width: 100%;
     padding: 10px;
     font-size: 14px;
   }
 
   /* Table - Horizontal Scroll */
-  .data-table-librarian {
+  .data-table-readers {
     font-size: 11px;
     display: block;
     overflow-x: auto;
@@ -496,15 +496,15 @@ main .libraian-management {
     white-space: nowrap;
   }
 
-  .data-table-librarian thead {
+  .data-table-readers thead {
     display: none;
   }
 
-  .data-table-librarian tbody {
+  .data-table-readers tbody {
     display: block;
   }
 
-  .table-row-librarian {
+  .table-row-readers {
     display: block;
     border: 1px solid #ddd;
     margin-bottom: 10px;
@@ -512,7 +512,7 @@ main .libraian-management {
     background-color: #fff;
   }
 
-  .table-row-librarian td {
+  .table-row-readers td {
     display: block;
     text-align: left;
     padding: 8px;
@@ -523,7 +523,7 @@ main .libraian-management {
     white-space: normal;
   }
 
-  .table-row-librarian td:before {
+  .table-row-readers td:before {
     content: attr(data-label);
     position: absolute;
     left: 6px;
@@ -533,20 +533,20 @@ main .libraian-management {
     font-size: 10px;
   }
 
-  .table-row-librarian td:last-child {
+  .table-row-readers td:last-child {
     border-bottom: none;
   }
 
-  .action-cell-librarian {
+  .action-cell-readers {
     display: flex;
     flex-direction: column;
     gap: 5px;
     padding: 10px 8px;
   }
 
-  .btn-edit-librarian,
-  .btn-delete-librarian,
-  .btn-detail-librarian {
+  .btn-edit-readers,
+  .btn-delete-readers,
+  .btn-detail-readers {
     width: 100%;
     margin: 0;
     padding: 8px;
@@ -554,35 +554,35 @@ main .libraian-management {
     border-radius: 3px;
   }
 
-  .btn-edit-librarian {
+  .btn-edit-readers {
     margin-right: 0;
   }
 
-  .btn-delete-librarian {
+  .btn-delete-readers {
     margin-right: 0;
   }
 
-  .no-data-librarian {
+  .no-data-readers {
     padding: 40px 10px !important;
     font-size: 14px;
   }
 
   /* Pagination - Mobile */
-  .pagination-librarian {
+  .pagination-readers {
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 20px;
     padding: 0 5px;
   }
 
-  .btn-page-librarian {
+  .btn-page-readers {
     padding: 8px 10px;
     font-size: 12px;
     flex: 1 1 calc(33.333% - 6px);
     min-width: 50px;
   }
 
-  .page-info-librarian {
+  .page-info-readers {
     flex: 1 1 100%;
     padding: 8px 12px;
     font-size: 12px;
@@ -590,25 +590,25 @@ main .libraian-management {
   }
 
   @media (max-width: 360px) {
-    .btn-page-librarian:nth-child(1),
-    .btn-page-librarian:nth-child(5) {
+    .btn-page-readers:nth-child(1),
+    .btn-page-readers:nth-child(5) {
       display: none;
     }
 
-    .pagination-librarian {
+    .pagination-readers {
       gap: 4px;
     }
 
-    .btn-page-librarian {
+    .btn-page-readers {
       flex: 1 1 calc(50% - 4px);
     }
 
-    .table-row-librarian td {
+    .table-row-readers td {
       padding-left: 55%;
       padding: 6px;
     }
 
-    .search-input-librarian {
+    .search-input-readers {
       padding: 8px;
     }
   }
