@@ -4,24 +4,24 @@ import axios from "axios";
 import { Edit, Trash2, Eye, ChevronDown } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
-import "../../styles/Librarian.css";
+import "../../styles/Readers.css";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Librarian = () => {
-  const [activeMenuItem, setActiveMenuItem] = useState("librarians");
+const Reader = () => {
+  const [activeMenuItem, setActiveMenuItem] = useState("readers");
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [librarians, setLibrarians] = useState([]);
+  const [readers, setReaders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredLibrarians, setFilteredLibrarians] = useState([]);
+  const [filteredreaders, setFilteredreaders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [sortField, setSortField] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleteLibrarianId, setDeleteLibrarianId] = useState(null);
+  const [deleteReaderId, setdeleteReaderId] = useState(null);
   const itemsPerPage = 10;
   const navigate = useNavigate();
   const sortDropdownRef = useRef(null);
@@ -32,26 +32,26 @@ const Librarian = () => {
       "/books": "books",
       "/readers": "readers",
       "/categorys": "category",
-      "/librarians": "librarians",
+      "/readers": "readers",
       "/borrows": "borrows",
       "/penalties": "penalties",
       "/reports": "reports",
     };
-    setActiveMenuItem(pathToItem[location.pathname] || "librarians");
+    setActiveMenuItem(pathToItem[location.pathname] || "readers");
   }, [location.pathname]);
 
   useEffect(() => {
-    fetchLibrarians();
+    fetchReaders();
   }, []);
 
-  const fetchLibrarians = async () => {
+  const fetchReaders = async () => {
     try {
-      const response = await axios.get("/api/librarians/getAllLibrarian");
-      setLibrarians(response.data);
-      setFilteredLibrarians(response.data);
+      const response = await axios.get("/api/readers/getAllReaders");
+      setReaders(response.data);
+      setFilteredreaders(response.data);
       setCurrentPage(1);
     } catch (error) {
-      console.error("Error fetching librarians:", error);
+      console.error("Error fetching readers:", error);
       toast.error("Failed to load librarian list!");
     }
   };
@@ -75,14 +75,14 @@ const Librarian = () => {
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = librarians.filter(
-      (lib) =>
-        lib.librarianId.toLowerCase().includes(term) ||
-        lib.librarianName.toLowerCase().includes(term) ||
-        lib.phone.includes(term) ||
-        lib.email.toLowerCase().includes(term)
+    const filtered = readers.filter(
+      (reader) =>
+        reader.readerId.toLowerCase().includes(term) ||
+        reader.name.toLowerCase().includes(term) ||
+        reader.numberPhone.toLowerCase().includes(term) ||
+        reader.email.includes(term)
     );
-    setFilteredLibrarians(filtered);
+    setFilteredreaders(filtered);
     setCurrentPage(1);
   };
 
@@ -91,48 +91,53 @@ const Librarian = () => {
     setSortOrder(order);
     setSortDropdownOpen(false);
 
-    const sorted = [...filteredLibrarians].sort((a, b) => {
+    const sorted = [...filteredreaders].sort((a, b) => {
       let valueA, valueB;
 
       if (field === "name") {
-        valueA = a.librarianName.toLowerCase();
-        valueB = b.librarianName.toLowerCase();
+        valueA = a.name.toLowerCase();
+        valueB = b.name.toLowerCase();
         return order === "asc"
           ? valueA.localeCompare(valueB)
           : valueB.localeCompare(valueA);
-      } else if (field === "salary") {
-        valueA = parseFloat(a.totalSalary) || 0;
-        valueB = parseFloat(b.totalSalary) || 0;
+      } else if (field === "cardType") {
+        const cardPriority = {
+          BRONZE: 1,
+          SILVER: 2,
+          VIP: 3,
+        };
+
+        valueA = cardPriority[a.cardType] || 0;
+        valueB = cardPriority[b.cardType] || 0;
+
         return order === "asc" ? valueA - valueB : valueB - valueA;
       }
     });
 
-    setFilteredLibrarians(sorted);
+    setFilteredreaders(sorted);
     setCurrentPage(1);
   };
 
   const handleAdd = () => {
-    navigate("/librarians/createLibrarian");
+    navigate("/readers/createReader");
   };
 
   const handleEdit = (id) => {
-    navigate(`/librarians/editLibrarian/${id}`);
+    navigate(`/readers/editReader/${id}`);
   };
 
   const handleDelete = (id) => {
-    setDeleteLibrarianId(id);
+    setdeleteReaderId(id);
     setShowDeleteModal(true);
   };
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(
-        `/api/librarians/deleteLibrarian/${deleteLibrarianId}`
-      );
-      fetchLibrarians();
+      await axios.delete(`/api/readers/deleteReader/${deleteReaderId}`);
+      fetchReaders();
       setShowDeleteModal(false);
-      setDeleteLibrarianId(null);
-      toast.success("Librarian deleted successfully!");
+      setdeleteReaderId(null);
+      toast.success("Reader deleted successfully!");
     } catch (error) {
       console.error("Error deleting librarian:", error);
       toast.error("Cannot delete librarian!");
@@ -142,11 +147,11 @@ const Librarian = () => {
 
   const cancelDelete = () => {
     setShowDeleteModal(false);
-    setDeleteLibrarianId(null);
+    setdeleteReaderId(null);
   };
 
   const handleDetail = (id) => {
-    navigate(`/librarians/detailLibrarian/${id}`);
+    navigate(`/readers/detailReader/${id}`);
   };
 
   const handleMenuClick = (itemId) => {
@@ -161,10 +166,10 @@ const Librarian = () => {
     setSidebarOpen(false);
   };
 
-  const totalPages = Math.ceil(filteredLibrarians.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredreaders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentLibrarians = filteredLibrarians.slice(startIndex, endIndex);
+  const currentreaders = filteredreaders.slice(startIndex, endIndex);
 
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -175,8 +180,8 @@ const Librarian = () => {
   const getSortLabel = () => {
     if (sortField === "name") {
       return `Sort by Name ${sortOrder === "asc" ? "(A-Z)" : "(Z-A)"}`;
-    } else if (sortField === "salary") {
-      return `Sort by Salary ${
+    } else if (sortField === "cardType") {
+      return `Sort by cardType ${
         sortOrder === "asc" ? "(Low-High)" : "(High-Low)"
       }`;
     }
@@ -197,60 +202,60 @@ const Librarian = () => {
         />
 
         <main className="main-content">
-          <h1 className="libraian-management">Librarian Management</h1>
+          <h1 className="readers-management">Readers Management</h1>
 
-          <div className="controls-librarian">
+          <div className="controls-readers">
             <input
               type="text"
               placeholder="Search by name, ID, phone, email..."
               value={searchTerm}
               onChange={handleSearch}
-              className="search-input-librarian"
+              className="search-input-readers"
             />
 
             <div
-              className="sort-dropdown-container-librarian"
+              className="sort-dropdown-container-readers"
               ref={sortDropdownRef}
             >
               <button
                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-                className="btn btn-sort-dropdown-librarian"
+                className="btn btn-sort-dropdown-readers"
               >
                 <span>{getSortLabel()}</span>
                 <ChevronDown
                   size={18}
-                  className={`dropdown-icon-librarian ${
+                  className={`dropdown-icon-readers ${
                     sortDropdownOpen ? "open" : ""
                   }`}
                 />
               </button>
 
               {sortDropdownOpen && (
-                <div className="sort-dropdown-menu-librarian">
+                <div className="sort-dropdown-menu-readers">
                   <button
-                    className="btn sort-option-librarian"
+                    className="btn sort-option-readers"
                     onClick={() => handleSort("name", "asc")}
                   >
                     Name (A-Z)
                   </button>
                   <button
-                    className="btn sort-option-librarian"
+                    className="btn sort-option-readers"
                     onClick={() => handleSort("name", "desc")}
                   >
                     Name (Z-A)
                   </button>
-                  <div className="sort-divider-librarian"></div>
+                  <div className="sort-divider-readers"></div>
                   <button
-                    className="btn sort-option-librarian"
-                    onClick={() => handleSort("salary", "asc")}
+                    className="btn sort-option-readers"
+                    onClick={() => handleSort("cardType", "asc")}
                   >
-                    Salary (Low-High)
+                    Card Type (Low-High)
                   </button>
                   <button
-                    className="btn sort-option-librarian"
-                    onClick={() => handleSort("salary", "desc")}
+                    className="btn sort-option-readers"
+                    onClick={() => handleSort("cardType", "desc")}
                   >
-                    Salary (High-Low)
+                    Card Type (High-Low)
                   </button>
                 </div>
               )}
@@ -258,77 +263,98 @@ const Librarian = () => {
 
             <button
               onClick={handleAdd}
-              className="btn-action-librarian btn-add-librarian"
+              className="btn-action-readers btn-add-readers"
             >
-              Add Librarian
+              Add Reader
             </button>
           </div>
 
-          <table className="data-table-librarian">
+          <table className="data-table-readers">
             <thead>
-              <tr className="table-footer-librarian">
-                <th colSpan="7" className="footer-info-librarian">
-                  Total: {filteredLibrarians.length} /{" "}
-                  {currentPage * itemsPerPage}
+              <tr className="table-footer-readers">
+                <th colSpan="7" className="footer-info-readers">
+                  Total: {filteredreaders.length} / {currentPage * itemsPerPage}
                 </th>
               </tr>
-              <tr className="table-header-librarian">
+              <tr className="table-header-readers">
                 <th>ID</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Shift</th>
-                <th>Salary</th>
+                <th>Address</th>
+                <th>Card Type</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(currentLibrarians) &&
-              currentLibrarians.length > 0 ? (
-                currentLibrarians.map((lib) => (
-                  <tr key={lib.librarianId} className="table-row-librarian">
-                    <td>{lib.librarianId}</td>
-                    <td>{lib.librarianName}</td>
-                    <td>{lib.phone}</td>
-                    <td>{lib.email}</td>
+              {Array.isArray(currentreaders) && currentreaders.length > 0 ? (
+                currentreaders.map((reader) => (
+                  <tr key={reader.readerId} className="table-row-readers">
+                    <td>{reader.readerId}</td>
+                    <td>{reader.name}</td>
+                    <td>{reader.numberPhone}</td>
+                    <td>{reader.email}</td>
+                    <td>{reader.address}</td>
                     <td>
-                      {lib.shiftName} ({lib.timeShift})
+                      {reader.cardType === "BRONZE" && (
+                        <>
+                          BRONZE
+                          <i
+                            className="fas fa-coins"
+                            style={{ color: "#a0a0a0", marginLeft: "5px" }}
+                          ></i>
+                        </>
+                      )}
+                      {reader.cardType === "SILVER" && (
+                        <>
+                          SILVER
+                          <i
+                            className="fas fa-gem"
+                            style={{ color: "#00bfff", marginLeft: "5px" }}
+                          ></i>
+                        </>
+                      )}
+                      {reader.cardType === "VIP" && (
+                        <>
+                          VIP
+                          <i
+                            className="fas fa-crown"
+                            style={{ color: "gold", marginLeft: "5px" }}
+                          ></i>
+                        </>
+                      )}
                     </td>
-                    <td>{lib.totalSalary.toLocaleString()} VND</td>
-                    <td className="action-cell-librarian">
+                    <td className="action-cell-readers">
                       <button
                         title="Edit"
-                        onClick={() => handleEdit(lib.librarianId)}
-                        className="btn btn-edit-librarian"
+                        onClick={() => handleEdit(reader.readerId)}
+                        className="btn btn-edit-readers"
                       >
-                        <Edit
-                          size={20}
-                          className="menu-action-librarian-icon"
-                        />
+                        <Edit size={20} className="menu-action-readers-icon" />
                       </button>
                       <button
                         title="Delete"
-                        onClick={() => handleDelete(lib.librarianId)}
-                        className="btn btn-delete-librarian"
+                        onClick={() => handleDelete(reader.readerId)}
+                        className="btn btn-delete-readers"
                       >
                         <Trash2
                           size={20}
-                          className="menu-action-librarian-icon"
+                          className="menu-action-readers-icon"
                         />
                       </button>
                       <button
                         title="Detail"
-                        onClick={() => handleDetail(lib.librarianId)}
-                        className="btn btn-detail-librarian"
+                        onClick={() => handleDetail(reader.readerId)}
+                        className="btn btn-detail-readers"
                       >
-                        <Eye size={20} className="menu-action-librarian-icon" />
+                        <Eye size={20} className="menu-action-readers-icon" />
                       </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="no-data-librarian">
+                  <td colSpan="7" className="no-data-readers">
                     No data
                   </td>
                 </tr>
@@ -336,12 +362,12 @@ const Librarian = () => {
             </tbody>
           </table>
 
-          {filteredLibrarians.length > 0 && (
-            <div className="pagination-librarian">
+          {filteredreaders.length > 0 && (
+            <div className="pagination-readers">
               <button
                 onClick={() => handlePageChange(1)}
                 disabled={currentPage === 1}
-                className="btn-page-librarian"
+                className="btn-page-readers"
                 title="First page"
               >
                 &lt;&lt;
@@ -350,20 +376,20 @@ const Librarian = () => {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="btn-page-librarian"
+                className="btn-page-readers"
                 title="Previous page"
               >
                 &lt;
               </button>
 
-              <span className="page-info-librarian">
+              <span className="page-info-readers">
                 Page {currentPage} / {totalPages}
               </span>
 
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="btn-page-librarian"
+                className="btn-page-readers"
                 title="Next page"
               >
                 &gt;
@@ -372,7 +398,7 @@ const Librarian = () => {
               <button
                 onClick={() => handlePageChange(totalPages)}
                 disabled={currentPage === totalPages}
-                className="btn-page-librarian"
+                className="btn-page-readers"
                 title="Last page"
               >
                 &gt;&gt;
@@ -381,20 +407,20 @@ const Librarian = () => {
           )}
 
           {showDeleteModal && (
-            <div className="modal-overlay-librarian">
-              <div className="modal-content-librarian">
+            <div className="modal-overlay-readers">
+              <div className="modal-content-readers">
                 <h2>Confirm Delete</h2>
-                <p>Are you sure you want to delete this librarian?</p>
-                <div className="modal-buttons-librarian">
+                <p>Are you sure you want to delete this reader?</p>
+                <div className="modal-buttons-readers">
                   <button
                     onClick={confirmDelete}
-                    className="modal-btn-confirm-librarian"
+                    className="modal-btn-confirm-readers"
                   >
                     Delete
                   </button>
                   <button
                     onClick={cancelDelete}
-                    className="modal-btn-cancel-librarian"
+                    className="modal-btn-cancel-readers"
                   >
                     Cancel
                   </button>
@@ -408,4 +434,4 @@ const Librarian = () => {
   );
 };
 
-export default Librarian;
+export default Reader;
