@@ -1,0 +1,111 @@
+/* ===== Container chính cho Borrow Management ===== */
+.borrow-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* ===== Tiêu đề với gạch dưới ===== */
+.borrow-header {
+    color: #093765;
+  
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0; /* Gạch dưới màu xanh giống Books */
+}
+
+/* ===== Thanh hành động: tìm kiếm, sắp xếp, thêm ===== */
+.borrow-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* Ô tìm kiếm */
+.borrow-search {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Dropdown Sort */
+.borrow-sort {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hiệu ứng hover cho Sort */
+.borrow-sort:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
+/* Nút Add Borrow */
+.borrow-add-btn {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hiệu ứng hover cho Add Borrow */
+.borrow-add-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* ===== Danh sách Borrow dạng card ===== */
+.borrow-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Card Borrow */
+.borrow-card {
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+/* Hover card */
+.borrow-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== Nút trong card ===== */
+.borrow-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.edit-btn, .delete-btn, .view-btn {
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn { background-color: #ffc107; }
+.delete-btn { background-color: #dc3545; }
+.view-btn { background-color: #17a2b8; }
+
+/* Hover cho nút trong card */
+.edit-btn:hover { background-color: #e0a800; }
+.delete-btn:hover { background-color: #c82333; }
+.view-btn:hover { background-color: #138496; }
