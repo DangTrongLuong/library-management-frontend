@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Edit, Trash2, Eye, ChevronDown } from "lucide-react";
+import { Edit, Trash2, Eye, ChevronDown, Plus } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
 import "../../styles/Readers.css";
@@ -265,6 +265,7 @@ const Reader = () => {
               onClick={handleAdd}
               className="btn-action-readers btn-add-readers"
             >
+              <Plus size={20} />
               Add Reader
             </button>
           </div>

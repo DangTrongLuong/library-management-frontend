@@ -6,7 +6,10 @@ import CreateBook from "./pages/Books/CreateBook";
 import EditBook from "./pages/Books/EditBook";
 import DetailBook from "./pages/Books/BookDetail";
 import Reader from "./pages/Readers/Reader";
-import Category from "./pages/Category";
+import CreateReader from "./pages/Readers/CreateReader";
+import EditReader from "./pages/Readers/EditReader";
+import DetailReader from "./pages/Readers/DetailReader";
+import Category from "./pages/Category/Category";
 import Librarian from "./pages/Librarian/Librarian";
 import CreateLibrarian from "./pages/Librarian/CreateLibrarian";
 import EditLibrarian from "./pages/Librarian/EditLibrarian";
@@ -27,6 +30,10 @@ const App = () => {
         <Route path="/books/editBook/:id" element={<EditBook />} />
         <Route path="/books/detailBook/:id" element={<DetailBook />} />
         <Route path="/readers" element={<Reader />} />
+        <Route path="/readers/createReader" element={<CreateReader />} />
+        <Route path="/readers/editReader/:id" element={<EditReader />} />
+        <Route path="/readers/detailReader/:id" element={<DetailReader />} />
+
         <Route path="/categorys" element={<Category />} />
         <Route path="/librarians" element={<Librarian />} />
         <Route

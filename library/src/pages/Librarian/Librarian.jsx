@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Edit, Trash2, Eye, ChevronDown } from "lucide-react";
+import { Edit, Trash2, Eye, ChevronDown, Plus } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
 import "../../styles/Librarian.css";
@@ -260,6 +260,7 @@ const Librarian = () => {
               onClick={handleAdd}
               className="btn-action-librarian btn-add-librarian"
             >
+              <Plus size={20} />
               Add Librarian
             </button>
           </div>

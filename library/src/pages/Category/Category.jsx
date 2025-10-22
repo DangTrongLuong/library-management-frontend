@@ -45,7 +45,7 @@ const Category = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("/api/categorys/getAllCategorys");
+      const response = await axios.get("/api/categories");
       setCategories(response.data);
       setFilteredCategories(response.data);
       setCurrentPage(1);
@@ -123,7 +123,7 @@ const Category = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`/api/categorys/deleteCategory/${deleteCategoryId}`);
+      await axios.delete(`/api/categories/${deleteCategoryId}`);
       fetchCategories();
       setShowDeleteModal(false);
       setDeleteCategoryId(null);
@@ -201,7 +201,10 @@ const Category = () => {
               className="category-search-input"
             />
 
-            <div className="category-sort-dropdown-container" ref={sortDropdownRef}>
+            <div
+              className="category-sort-dropdown-container"
+              ref={sortDropdownRef}
+            >
               <button
                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
                 className="category-btn category-sort-dropdown"
@@ -259,7 +262,8 @@ const Category = () => {
           </div>
 
           <div className="category-grid">
-            {Array.isArray(currentCategories) && currentCategories.length > 0 ? (
+            {Array.isArray(currentCategories) &&
+            currentCategories.length > 0 ? (
               currentCategories.map((cat) => (
                 <div key={cat.categoryId} className="category-card">
                   <div className="category-card-content">
