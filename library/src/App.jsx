@@ -45,14 +45,5 @@ const App = () => {
       </Routes>
     </Router>
   );
-
-  function App() {
-    return (
-      <div>
-        <BookList />
-      </div>
-    );
-  }
 };
-
 export default App;
