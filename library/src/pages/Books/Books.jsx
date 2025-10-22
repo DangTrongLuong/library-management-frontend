@@ -273,7 +273,11 @@ const Books = () => {
           <div className="books-grid">
             {Array.isArray(currentBooks) && currentBooks.length > 0 ? (
               currentBooks.map((book) => (
-                <div key={book.bookId} className="books-card">
+                <div
+                  key={book.bookId}
+                  className="books-card"
+                  onClick={() => handleDetail(book.bookId)}
+                >
                   <div className="books-card-image">
                     {book.imageUrl ? (
                       <img
@@ -319,13 +323,13 @@ const Books = () => {
                     >
                       <Trash2 size={18} />
                     </button>
-                    <button
+                    {/* <button
                       title="Detail"
                       onClick={() => handleDetail(book.bookId)}
                       className="books-btn books-btn-detail"
                     >
                       <Eye size={18} />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               ))

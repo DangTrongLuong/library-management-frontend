@@ -1,0 +1,268 @@
+/* Edit Reader Wrapper */
+.edit-reader-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.edit-reader-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.edit-reader-h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #093765;
+  font-weight: 600;
+}
+
+.edit-reader-btn-back {
+  padding: 8px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-reader-btn-back:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Form Container */
+.edit-reader-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.edit-reader-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Form Section */
+.edit-reader-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.edit-reader-section:last-of-type {
+  border-bottom: none;
+}
+
+.edit-reader-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #093765;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ffc107;
+  display: inline-block;
+}
+
+/* Row */
+.edit-reader-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Group */
+.edit-reader-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edit-reader-group-date {
+  display: none;
+}
+
+.edit-reader-group label {
+  font-weight: 500;
+  color: #093765;
+  font-size: 14px;
+}
+
+.edit-reader-required {
+  color: #dc3545;
+}
+
+/* Input Wrapper */
+.edit-reader-input-wrapper {
+  position: relative;
+}
+
+.edit-reader-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffc107;
+  z-index: 1;
+}
+
+.edit-reader-input {
+  width: 100%;
+  padding: 12px 12px 12px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.edit-reader-input:focus {
+  outline: none;
+  border-color: #ffc107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+}
+
+.edit-reader-input.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.edit-reader-error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Actions */
+.edit-reader-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.edit-reader-btn-submit,
+.edit-reader-btn-cancel {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.edit-reader-btn-submit {
+  background-color: #ffc107;
+  color: #333;
+  min-width: 150px;
+}
+
+.edit-reader-btn-submit:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.edit-reader-btn-cancel {
+  background-color: #6c757d;
+  color: white;
+  min-width: 150px;
+}
+
+.edit-reader-btn-cancel:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Loading */
+.edit-reader-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-reader-wrapper {
+    padding: 15px;
+  }
+
+  .edit-reader-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .edit-reader-h1 {
+    font-size: 24px;
+  }
+
+  .edit-reader-container {
+    padding: 20px;
+  }
+
+  .edit-reader-row {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-reader-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .edit-reader-btn-submit,
+  .edit-reader-btn-cancel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-reader-wrapper {
+    padding: 10px;
+  }
+
+  .edit-reader-h1 {
+    font-size: 20px;
+  }
+
+  .edit-reader-container {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .edit-reader-input {
+    padding: 10px 10px 10px 36px;
+    font-size: 13px;
+  }
+
+  .edit-reader-actions {
+    gap: 8px;
+  }
+
+  .edit-reader-btn-submit,
+  .edit-reader-btn-cancel {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}

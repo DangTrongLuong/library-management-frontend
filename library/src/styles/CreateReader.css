@@ -1,0 +1,244 @@
+/* Create Reader Wrapper */
+.create-reader-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.create-reader-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.create-reader-h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #093765;
+  font-weight: 600;
+}
+
+.create-reader-btn-back {
+  padding: 8px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-reader-btn-back:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Form Container */
+.create-reader-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.create-reader-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Form Section */
+.create-reader-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.create-reader-section:last-of-type {
+  border-bottom: none;
+}
+
+.create-reader-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #093765;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #28a745;
+  display: inline-block;
+}
+
+/* Row */
+.create-reader-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Group */
+.create-reader-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.create-reader-group label {
+  font-weight: 500;
+  color: #093765;
+  font-size: 14px;
+}
+
+.create-reader-required {
+  color: #dc3545;
+}
+
+/* Input Wrapper */
+.create-reader-input-wrapper {
+  position: relative;
+}
+
+.create-reader-input {
+  width: 100%;
+  padding: 12px 12px 12px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.create-reader-input:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.create-reader-input.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.create-reader-error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Actions */
+.create-reader-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.create-reader-btn-submit,
+.create-reader-btn-cancel {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.create-reader-btn-submit {
+  background-color: #28a745;
+  color: white;
+  min-width: 150px;
+}
+
+.create-reader-btn-submit:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.create-reader-btn-cancel {
+  background-color: #6c757d;
+  color: white;
+  min-width: 150px;
+}
+
+.create-reader-btn-cancel:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .create-reader-wrapper {
+    padding: 15px;
+  }
+
+  .create-reader-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .create-reader-h1 {
+    font-size: 24px;
+  }
+
+  .create-reader-container {
+    padding: 20px;
+  }
+
+  .create-reader-row {
+    grid-template-columns: 1fr;
+  }
+
+  .create-reader-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .create-reader-btn-submit,
+  .create-reader-btn-cancel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-reader-wrapper {
+    padding: 10px;
+  }
+
+  .create-reader-h1 {
+    font-size: 20px;
+  }
+
+  .create-reader-container {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .create-reader-input {
+    padding: 10px 10px 10px 36px;
+    font-size: 13px;
+  }
+
+  .create-reader-actions {
+    gap: 8px;
+  }
+
+  .create-reader-btn-submit,
+  .create-reader-btn-cancel {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
