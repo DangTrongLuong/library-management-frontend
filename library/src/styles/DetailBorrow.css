@@ -1,0 +1,259 @@
+/* Detail Borrow Wrapper */
+.detail-borrow-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.detail-borrow-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.detail-borrow-h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #093765;
+  font-weight: 600;
+}
+
+.detail-borrow-btn-back {
+  padding: 8px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-borrow-btn-back:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Container */
+.detail-borrow-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Info Section */
+.detail-borrow-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-borrow-title {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #093765;
+  border-bottom: 2px solid #17a2b8;
+  padding-bottom: 10px;
+}
+
+.detail-borrow-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.detail-borrow-info-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.detail-borrow-icon {
+  color: #17a2b8;
+}
+
+.detail-borrow-label {
+  font-weight: 600;
+  color: #093765;
+  min-width: 120px;
+}
+
+.detail-borrow-value {
+  color: #495057;
+  font-size: 15px;
+}
+
+/* Actions */
+.detail-borrow-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.detail-borrow-btn-edit {
+  padding: 12px 32px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-borrow-btn-edit:hover {
+  background-color: #138496;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+.detail-borrow-btn-cancel {
+  padding: 12px 32px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-borrow-btn-cancel:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Loading */
+.detail-borrow-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Error */
+.detail-borrow-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  font-size: 18px;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Responsive Tablet */
+@media (max-width: 768px) {
+  .detail-borrow-wrapper {
+    padding: 15px;
+  }
+
+  .detail-borrow-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .detail-borrow-h1 {
+    font-size: 24px;
+  }
+
+  .detail-borrow-container {
+    padding: 20px;
+  }
+
+  .detail-borrow-info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-borrow-label {
+    min-width: auto;
+  }
+
+  .detail-borrow-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .detail-borrow-btn-edit,
+  .detail-borrow-btn-cancel {
+    width: 100%;
+  }
+}
+
+/* Responsive Mobile */
+@media (max-width: 480px) {
+  .detail-borrow-wrapper {
+    padding: 10px;
+  }
+
+  .detail-borrow-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+
+  .detail-borrow-h1 {
+    font-size: 20px;
+  }
+
+  .detail-borrow-btn-back {
+    padding: 6px 10px;
+  }
+
+  .detail-borrow-container {
+    padding: 15px;
+  }
+
+  .detail-borrow-title {
+    font-size: 20px;
+  }
+
+  .detail-borrow-info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .detail-borrow-actions {
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .detail-borrow-btn-edit,
+  .detail-borrow-btn-cancel {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: auto;
+    width: 100%;
+  }
+}

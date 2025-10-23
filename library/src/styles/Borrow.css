@@ -1,111 +1,531 @@
-/* ===== Container chính cho Borrow Management ===== */
-.borrow-container {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-}
-
-/* ===== Tiêu đề với gạch dưới ===== */
+/* Borrow Header */
 .borrow-header {
-    color: #093765;
-  
-  font-weight: 600;
-  margin-bottom: 20px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #e0e0e0; /* Gạch dưới màu xanh giống Books */
-}
-
-/* ===== Thanh hành động: tìm kiếm, sắp xếp, thêm ===== */
-.borrow-actions {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding: 0 0 10px 0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
-/* Ô tìm kiếm */
-.borrow-search {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Borrow Title */
+.borrow-title {
+  color: #093765;
+  font-weight: 500;
+
+  margin: 0;
 }
 
-/* Dropdown Sort */
-.borrow-sort {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Hiệu ứng hover cho Sort */
-.borrow-sort:hover {
-  background-color: #f1f1f1;
-  cursor: pointer;
-  transform: scale(1.03);
-}
-
-/* Nút Add Borrow */
+/* Add Button */
 .borrow-add-btn {
+  padding: 10px 20px;
   background-color: #28a745;
-  color: #fff;
-  padding: 10px 14px;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* Hiệu ứng hover cho Add Borrow */
 .borrow-add-btn:hover {
   background-color: #218838;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
-/* ===== Danh sách Borrow dạng card ===== */
-.borrow-list {
+/* Controls Section */
+.borrow-controls {
   display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
 }
 
-/* Card Borrow */
-.borrow-card {
-  width: 250px;
+/* Search Input */
+.borrow-search-input {
+  padding: 10px 15px;
+  flex: 1;
+  min-width: 250px;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-/* Hover card */
-.borrow-card:hover {
-  transform: translateY(-5px);
+.borrow-search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
-/* ===== Nút trong card ===== */
-.borrow-card-actions {
+/* Sort Dropdown Container */
+.borrow-sort-dropdown-container {
+  position: relative;
+}
+
+/* Sort Dropdown Button */
+.borrow-sort-dropdown {
+  padding: 10px 16px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
-.edit-btn, .delete-btn, .view-btn {
-  padding: 5px;
+.borrow-sort-dropdown:hover {
+  background-color: #138496;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+/* Dropdown Icon */
+.borrow-dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.borrow-dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
+/* Sort Dropdown Menu */
+.borrow-sort-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 100;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+  margin-top: 5px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sort Option */
+.borrow-sort-option {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.borrow-sort-option:last-child {
+  border-bottom: none;
+}
+
+.borrow-sort-option:hover {
+  background-color: #f5f5f5;
+  padding-left: 20px;
+}
+
+/* Sort Divider */
+.borrow-sort-divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 4px 0;
+}
+
+/* Filter Dropdown Container */
+.borrow-filter-dropdown-container {
+  position: relative;
+}
+
+/* Filter Dropdown Button */
+.borrow-filter-dropdown {
+  padding: 10px 16px;
+  background-color: #ffc107;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.borrow-filter-dropdown:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+/* Filter Dropdown Menu */
+.borrow-filter-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 100;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+  margin-top: 5px;
+}
+
+.borrow-filter-option {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.borrow-filter-option:last-child {
+  border-bottom: none;
+}
+
+.borrow-filter-option:hover {
+  background-color: #f5f5f5;
+  padding-left: 20px;
+}
+
+/* Table Container */
+.borrow-table-container {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: auto;
+  margin-bottom: 30px;
+}
+
+/* Table */
+.borrow-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.borrow-table th,
+.borrow-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.borrow-table th {
+  background-color: #f8f9fa;
+  color: #093765;
+  font-weight: 600;
+}
+
+/* Buttons */
+.borrow-btn {
+  padding: 6px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  color: #fff;
-  transition: background-color 0.3s ease;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  margin-right: 5px;
 }
 
-.edit-btn { background-color: #ffc107; }
-.delete-btn { background-color: #dc3545; }
-.view-btn { background-color: #17a2b8; }
+.borrow-btn-detail {
+  background-color: #009e91;
+  color: white;
+}
 
-/* Hover cho nút trong card */
-.edit-btn:hover { background-color: #e0a800; }
-.delete-btn:hover { background-color: #c82333; }
-.view-btn:hover { background-color: #138496; }
+.borrow-btn-detail:hover {
+  background-color: #5a6268;
+}
+
+.borrow-btn-edit {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.borrow-btn-edit:hover {
+  background-color: #e0a800;
+}
+
+.borrow-btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.borrow-btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Pagination */
+.borrow-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.borrow-btn-page {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.borrow-btn-page:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
+.borrow-btn-page:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.borrow-page-info {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #093765;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Modal Overlay */
+.borrow-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 30px;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content */
+.borrow-modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.borrow-modal-content h2 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.borrow-modal-content p {
+  margin: 0 0 25px 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Modal Buttons */
+.borrow-modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.borrow-modal-btn-confirm {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.borrow-modal-btn-confirm:hover {
+  background-color: #c82333;
+}
+
+.borrow-modal-btn-cancel {
+  padding: 10px 20px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.borrow-modal-btn-cancel:hover {
+  background-color: #5a6268;
+}
+
+/* No Data */
+.borrow-no-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+/* Responsive Tablet */
+@media (max-width: 768px) {
+  .borrow-controls {
+    flex-direction: column;
+  }
+
+  .borrow-search-input,
+  .borrow-sort-dropdown,
+  .borrow-filter-dropdown {
+    width: 100%;
+  }
+
+  .borrow-table th,
+  .borrow-table td {
+    padding: 12px 8px;
+  }
+
+  .borrow-pagination {
+    flex-wrap: wrap;
+  }
+}
+
+/* Responsive Mobile */
+@media (max-width: 480px) {
+  .borrow-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .borrow-title {
+    font-size: 24px;
+  }
+
+  .borrow-add-btn {
+    width: 100%;
+  }
+
+  .borrow-controls {
+    gap: 8px;
+  }
+
+  .borrow-search-input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .borrow-sort-dropdown,
+  .borrow-filter-dropdown {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .borrow-table {
+    font-size: 12px;
+  }
+
+  .borrow-table th,
+  .borrow-table td {
+    padding: 10px 6px;
+  }
+
+  .borrow-btn-detail,
+  .borrow-btn-edit,
+  .borrow-btn-delete {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .borrow-pagination {
+    gap: 6px;
+  }
+
+  .borrow-btn-page {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .borrow-page-info {
+    font-size: 12px;
+  }
+
+  .borrow-modal-content {
+    padding: 15px;
+  }
+
+  .borrow-modal-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .borrow-modal-btn-confirm,
+  .borrow-modal-btn-cancel {
+    width: 100%;
+  }
+}
