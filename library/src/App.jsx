@@ -15,7 +15,10 @@ import Librarian from "./pages/Librarian/Librarian";
 import CreateLibrarian from "./pages/Librarian/CreateLibrarian";
 import EditLibrarian from "./pages/Librarian/EditLibrarian";
 import LibrarianDetail from "./pages/Librarian/DetailLibrarian";
-import Borrow from "./pages/Borrow";
+import Borrow from "./pages/Borrow/Borrow";
+import CreateBorrow from "./pages/Borrow/CreateBorrow";
+import EditBorrow from "./pages/Borrow/EditBorrow";
+import DetailBorrow from "./pages/Borrow/DetailBorrow";
 import Fine from "./pages/Fine";
 import Report from "./pages/Report";
 
@@ -50,6 +53,9 @@ const App = () => {
           element={<LibrarianDetail />}
         />
         <Route path="/borrows" element={<Borrow />} />
+        <Route path="/borrows/createBorrow" element={<CreateBorrow />} />
+        <Route path="/borrows/editBorrow/:id" element={<EditBorrow />} />
+        <Route path="/borrows/detailBorrow/:id" element={<DetailBorrow />} />
         <Route path="/penalties" element={<Fine />} />
         <Route path="/reports" element={<Report />} />
       </Routes>
