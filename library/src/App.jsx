@@ -10,6 +10,7 @@ import CreateReader from "./pages/Readers/CreateReader";
 import EditReader from "./pages/Readers/EditReader";
 import DetailReader from "./pages/Readers/DetailReader";
 import Category from "./pages/Category/Category";
+import CreateCategory from "./pages/Category/CreateCategory";
 import Librarian from "./pages/Librarian/Librarian";
 import CreateLibrarian from "./pages/Librarian/CreateLibrarian";
 import EditLibrarian from "./pages/Librarian/EditLibrarian";
@@ -33,8 +34,8 @@ const App = () => {
         <Route path="/readers/createReader" element={<CreateReader />} />
         <Route path="/readers/editReader/:id" element={<EditReader />} />
         <Route path="/readers/detailReader/:id" element={<DetailReader />} />
-
         <Route path="/categorys" element={<Category />} />
+        <Route path="/categorys/createCategory" element={<CreateCategory />} />
         <Route path="/librarians" element={<Librarian />} />
         <Route
           path="/librarians/createLibrarian"
