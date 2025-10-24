@@ -38,7 +38,7 @@ const EditLibrarian = () => {
 
   useEffect(() => {
     const pathToItem = {
-      "/": "home",
+      "/dashboard": "home",
       "/books": "books",
       "/readers": "readers",
       "/categorys": "category",
@@ -122,7 +122,7 @@ const EditLibrarian = () => {
       const selectedShift = shifts.find((shift) => shift.shiftName === value);
       setFormData({
         ...formData,
-        shiftId: selectedShift ? selectedShift.shiftId : "",  
+        shiftId: selectedShift ? selectedShift.shiftId : "",
       });
       if (errors.shiftId) {
         setErrors({ ...errors, shiftId: "" });

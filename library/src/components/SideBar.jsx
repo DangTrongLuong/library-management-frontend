@@ -27,7 +27,7 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
       icon: Home,
       label: "Home",
       hasSubmenu: true,
-      path: "/",
+      path: "/dashboard",
     },
     {
       id: "books",
@@ -125,7 +125,7 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
   };
 
   const handleLogout = () => {
-    window.location.reload();
+    window.location.href = "/";
   };
 
   return (
