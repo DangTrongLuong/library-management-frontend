@@ -1,0 +1,130 @@
+.fine-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding: 0 0 10px 0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.fine-title {
+  color: #093765;
+  font-weight: 500;
+  margin: 0;
+}
+
+.fine-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fine-sort-dropdown-container {
+  position: relative;
+}
+
+.fine-sort-dropdown {
+  padding: 10px 16px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fine-sort-dropdown:hover {
+  background-color: #138496;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+.fine-dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.fine-dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
+.fine-sort-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 100;
+  margin-top: 5px;
+}
+
+.fine-sort-dropdown-menu button {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+}
+
+.fine-table-container {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: auto;
+  margin-bottom: 30px;
+}
+
+.fine-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.fine-table th,
+.fine-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.fine-table th {
+  background-color: #f8f9fa;
+  color: #093765;
+  font-weight: 600;
+}
+
+.fine-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fine-btn-page {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.fine-page-info {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #093765;
+}
