@@ -19,7 +19,7 @@ import Borrow from "./pages/Borrow/Borrow";
 import CreateBorrow from "./pages/Borrow/CreateBorrow";
 import EditBorrow from "./pages/Borrow/EditBorrow";
 import DetailBorrow from "./pages/Borrow/DetailBorrow";
-import Fine from "./pages/Fine";
+import Fine from "./pages/Fine/Fine";
 import Report from "./pages/Report";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
