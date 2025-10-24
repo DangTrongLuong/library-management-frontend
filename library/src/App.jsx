@@ -23,12 +23,15 @@ import Fine from "./pages/Fine";
 import Report from "./pages/Report";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import LoginPage from "./pages/Login/Login";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/books" element={<Books />} />
         <Route path="/books/createBook" element={<CreateBook />} />
         <Route path="/books/editBook/:id" element={<EditBook />} />

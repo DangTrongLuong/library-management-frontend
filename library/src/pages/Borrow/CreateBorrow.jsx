@@ -26,7 +26,7 @@ const CreateBorrow = () => {
 
   useEffect(() => {
     const pathToItem = {
-      "/": "home",
+      "/dashboard": "home",
       "/books": "books",
       "/readers": "readers",
       "/categorys": "category",

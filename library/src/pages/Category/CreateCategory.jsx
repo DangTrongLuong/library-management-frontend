@@ -15,7 +15,7 @@ const CreateCategory = () => {
   const [formData, setFormData] = useState({
     typeName: "",
     description: "",
-    shelfPosition: "", 
+    shelfPosition: "",
     note: "",
   });
   const [errors, setErrors] = useState({});
@@ -23,7 +23,7 @@ const CreateCategory = () => {
 
   useEffect(() => {
     const pathToItem = {
-      "/": "home",
+      "/dashboard": "home",
       "/books": "books",
       "/readers": "readers",
       "/categorys": "category",
@@ -50,7 +50,8 @@ const CreateCategory = () => {
     }
 
     if (formData.shelfPosition && formData.shelfPosition.length > 100) {
-      newErrors.shelfPosition = "Shelf position must be less than 100 characters";
+      newErrors.shelfPosition =
+        "Shelf position must be less than 100 characters";
     }
 
     if (formData.note && formData.note.length > 255) {
@@ -141,7 +142,8 @@ const CreateCategory = () => {
                   {/* Category Name */}
                   <div className="create-category-group">
                     <label htmlFor="typeName">
-                      Category Name <span className="create-category-required">*</span>
+                      Category Name{" "}
+                      <span className="create-category-required">*</span>
                     </label>
                     <input
                       id="typeName"
