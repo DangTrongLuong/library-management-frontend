@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import "../styles/Report.css";
 
-
+import axios from "axios";
 
 const Report = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("reports");
@@ -18,6 +18,9 @@ const Report = () => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -29,6 +32,24 @@ const Report = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "http://localhost:8080/api/reports/getAllReport"
+        );
+        setReports(response.data);
+      } catch (error) {
+        console.error("Error fetching reports:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReports();
   }, []);
 
   const getSortLabel = () =>
