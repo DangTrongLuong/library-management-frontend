@@ -1,30 +1,32 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Edit, Trash2, Eye, ChevronDown, Plus } from "lucide-react";
+import { Edit, Trash2, ChevronDown, Plus } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
+import "../../styles/Category.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/Category.css";
 
 const Category = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("category");
-  const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [filteredCategories, setFilteredCategories] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
-  const [sortField, setSortField] = useState("categoryName");
+  const [sortField, setSortField] = useState("typeName");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [currentPage, setCurrentPage] = useState(1);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState(null);
   const itemsPerPage = 10;
   const navigate = useNavigate();
+  const location = useLocation();
   const sortDropdownRef = useRef(null);
 
+  // 🟩 Cập nhật menu đang chọn
   useEffect(() => {
     const pathToItem = {
       "/dashboard": "home",
@@ -36,85 +38,60 @@ const Category = () => {
       "/penalties": "penalties",
       "/reports": "reports",
     };
-    setActiveMenuItem(pathToItem[location.pathname] || "home");
+    setActiveMenuItem(pathToItem[location.pathname] || "category");
   }, [location.pathname]);
 
+  // 🟩 Lấy danh sách category
   useEffect(() => {
     fetchCategories();
   }, []);
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("/api/categories");
-      setCategories(response.data);
-      setFilteredCategories(response.data);
+      const res = await axios.get("/api/categories");
+      setCategories(res.data);
+      setFilteredCategories(res.data);
       setCurrentPage(1);
     } catch (error) {
-      console.error("Error fetching categories:", error);
       toast.error("Failed to load category list!");
+      console.error("Error fetching categories:", error);
     }
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        sortDropdownRef.current &&
-        !sortDropdownRef.current.contains(event.target)
-      ) {
-        setSortDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleSearch = async (e) => {
-    const term = e.target.value;
+  // 🟩 Tìm kiếm
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-
-    if (term.trim() === "") {
-      setFilteredCategories(categories);
-    } else {
-      try {
-        const response = await axios.get(
-          `/api/categorys/search?keyword=${term}`
-        );
-        setFilteredCategories(response.data);
-      } catch (error) {
-        console.error("Error searching categories:", error);
-        toast.error("Search failed!");
-      }
-    }
+    const filtered = categories.filter(
+      (cat) =>
+        cat.typeName?.toLowerCase().includes(term) ||
+        cat.shelfPosition?.toLowerCase().includes(term) ||
+        cat.note?.toLowerCase().includes(term)
+    );
+    setFilteredCategories(filtered);
     setCurrentPage(1);
   };
 
+  // 🟩 Sắp xếp
   const handleSort = (field, order) => {
     setSortField(field);
     setSortOrder(order);
     setSortDropdownOpen(false);
 
     const sorted = [...filteredCategories].sort((a, b) => {
-      const valueA = a[field]?.toLowerCase() || "";
-      const valueB = b[field]?.toLowerCase() || "";
+      const valA = (a[field] || "").toLowerCase();
+      const valB = (b[field] || "").toLowerCase();
       return order === "asc"
-        ? valueA.localeCompare(valueB)
-        : valueB.localeCompare(valueA);
+        ? valA.localeCompare(valB)
+        : valB.localeCompare(valA);
     });
 
     setFilteredCategories(sorted);
-    setCurrentPage(1);
   };
 
-  const handleAdd = () => {
-    navigate("/categorys/createCategory");
-  };
-
-  const handleEdit = (id) => {
-    navigate(`/categorys/updateCategory/${id}`);
-  };
+  // 🟩 CRUD
+  const handleAdd = () => navigate("/categorys/createCategory");
+  const handleEdit = (id) => navigate(`/categorys/editCategory/${id}`);
 
   const handleDelete = (id) => {
     setDeleteCategoryId(id);
@@ -125,222 +102,188 @@ const Category = () => {
     try {
       await axios.delete(`/api/categories/${deleteCategoryId}`);
       fetchCategories();
-      setShowDeleteModal(false);
-      setDeleteCategoryId(null);
       toast.success("Category deleted successfully!");
+      setShowDeleteModal(false);
     } catch (error) {
-      console.error("Error deleting category:", error);
       toast.error("Cannot delete category!");
+      console.error(error);
       setShowDeleteModal(false);
     }
   };
 
   const cancelDelete = () => {
     setShowDeleteModal(false);
-    setDeleteCategoryId(null);
   };
 
-  const handleDetail = (id) => {
-    navigate(`/categorys/detailCategory/${id}`);
-  };
-
-  const handleMenuClick = (itemId) => {
-    setActiveMenuItem(itemId);
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
-
+  // 🟩 Phân trang
   const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentCategories = filteredCategories.slice(startIndex, endIndex);
 
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
-  const getSortLabel = () => {
-    if (sortField === "categoryName") {
-      return `Sort by Name ${sortOrder === "asc" ? "(A-Z)" : "(Z-A)"}`;
-    } else if (sortField === "shelfPosition") {
-      return `Sort by Shelf ${sortOrder === "asc" ? "(A-Z)" : "(Z-A)"}`;
-    }
-    return "Sort";
-  };
+  const getSortLabel = () =>
+    `Sort by ${sortField === "typeName" ? "Name" : sortField} ${
+      sortOrder === "asc" ? "(A-Z)" : "(Z-A)"
+    }`;
 
   return (
     <div className="my-project-container">
-      <ToastContainer autoClose={2000} />
-      <NavBar userName="Admin" onToggleSidebar={toggleSidebar} />
+      <ToastContainer autoClose={3000} />
+      <NavBar
+        userName="Admin"
+        onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+      />
 
       <div className="main-layout">
         <SideBar
           activeItem={activeMenuItem}
-          onItemClick={handleMenuClick}
+          onItemClick={setActiveMenuItem}
           isOpen={sidebarOpen}
-          onClose={closeSidebar}
+          onClose={() => setSidebarOpen(false)}
         />
 
         <main className="main-content">
-          <h1 className="category-management">Category Management</h1>
+          <h2 className="category-management">Category Management</h2>
 
-          <div className="category-controls">
+          <div className="controls-category">
             <input
               type="text"
-              placeholder="Search by name, shelf position, note..."
+              placeholder="Search by name, position, or note..."
               value={searchTerm}
               onChange={handleSearch}
-              className="category-search-input"
+              className="search-input-category"
             />
 
             <div
-              className="category-sort-dropdown-container"
+              className="sort-dropdown-container-category"
               ref={sortDropdownRef}
             >
               <button
                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-                className="category-btn category-sort-dropdown"
+                className="btn btn-sort-dropdown-category"
               >
                 <span>{getSortLabel()}</span>
                 <ChevronDown
                   size={18}
-                  className={`category-dropdown-icon ${
+                  className={`dropdown-icon-category ${
                     sortDropdownOpen ? "open" : ""
                   }`}
                 />
               </button>
 
               {sortDropdownOpen && (
-                <div className="category-sort-dropdown-menu">
+                <div className="sort-dropdown-menu-category">
                   <button
-                    className="category-btn category-sort-option"
-                    onClick={() => handleSort("categoryName", "asc")}
+                    className="sort-option-category"
+                    onClick={() => handleSort("typeName", "asc")}
                   >
                     Name (A-Z)
                   </button>
                   <button
-                    className="category-btn category-sort-option"
-                    onClick={() => handleSort("categoryName", "desc")}
+                    className="sort-option-category"
+                    onClick={() => handleSort("typeName", "desc")}
                   >
                     Name (Z-A)
-                  </button>
-                  <div className="category-sort-divider"></div>
-                  <button
-                    className="category-btn category-sort-option"
-                    onClick={() => handleSort("shelfPosition", "asc")}
-                  >
-                    Shelf (A-Z)
-                  </button>
-                  <button
-                    className="category-btn category-sort-option"
-                    onClick={() => handleSort("shelfPosition", "desc")}
-                  >
-                    Shelf (Z-A)
                   </button>
                 </div>
               )}
             </div>
 
-            <button onClick={handleAdd} className="category-btn-add">
+            <button
+              onClick={handleAdd}
+              className="btn-action-category btn-add-category"
+            >
               <Plus size={20} />
               Add Category
             </button>
           </div>
 
-          <div className="category-summary">
-            <span>
-              Total: {currentCategories.length} / {filteredCategories.length}
-            </span>
-          </div>
-
-          <div className="category-grid">
-            {Array.isArray(currentCategories) &&
-            currentCategories.length > 0 ? (
-              currentCategories.map((cat) => (
-                <div key={cat.categoryId} className="category-card">
-                  <div className="category-card-content">
-                    <h3 className="category-card-title">{cat.categoryName}</h3>
-                    <p className="category-card-info">
-                      <strong>Description:</strong> {cat.description || "N/A"}
-                    </p>
-                    <p className="category-card-info">
-                      <strong>Shelf:</strong> {cat.shelfPosition || "N/A"}
-                    </p>
-                    <p className="category-card-info">
-                      <strong>Note:</strong> {cat.note || "N/A"}
-                    </p>
-                  </div>
-
-                  <div className="category-card-actions">
-                    <button
-                      title="Edit"
-                      onClick={() => handleEdit(cat.categoryId)}
-                      className="category-btn category-btn-edit"
-                    >
-                      <Edit size={18} />
-                    </button>
-                    <button
-                      title="Delete"
-                      onClick={() => handleDelete(cat.categoryId)}
-                      className="category-btn category-btn-delete"
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                    <button
-                      title="Detail"
-                      onClick={() => handleDetail(cat.categoryId)}
-                      className="category-btn category-btn-detail"
-                    >
-                      <Eye size={18} />
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="category-no-data">No categories found</div>
-            )}
+          <div className="table-wrapper-category">
+            <table className="data-table-category">
+              <thead>
+                <tr className="table-footer-category">
+                  <th colSpan="7" className="footer-info-category">
+                    Total: {filteredCategories.length} /{" "}
+                    {currentPage * itemsPerPage}
+                  </th>
+                </tr>
+                <tr className="table-header-category">
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Shelf Position</th>
+                  <th>Note</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentCategories.length > 0 ? (
+                  currentCategories.map((cat) => (
+                    <tr key={cat.categoryId} className="table-row-category">
+                      <td>{cat.categoryId}</td>
+                      <td>{cat.typeName}</td>
+                      <td>{cat.description || "—"}</td>
+                      <td>{cat.shelfPosition || "—"}</td>
+                      <td>{cat.note || "—"}</td>
+                      <td className="action-cell-category">
+                        <button
+                          title="Edit"
+                          onClick={() => handleEdit(cat.categoryId)}
+                          className="btn btn-edit-category"
+                        >
+                          <Edit size={20} />
+                        </button>
+                        <button
+                          title="Delete"
+                          onClick={() => handleDelete(cat.categoryId)}
+                          className="btn btn-delete-category"
+                        >
+                          <Trash2 size={20} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="no-data-category">
+                      No data
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
 
           {filteredCategories.length > 0 && (
-            <div className="category-pagination">
+            <div className="pagination-category">
               <button
-                onClick={() => handlePageChange(1)}
+                onClick={() => setCurrentPage(1)}
                 disabled={currentPage === 1}
-                className="category-btn-page"
+                className="btn-page-category"
               >
                 &lt;&lt;
               </button>
               <button
-                onClick={() => handlePageChange(currentPage - 1)}
+                onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="category-btn-page"
+                className="btn-page-category"
               >
                 &lt;
               </button>
-
-              <span className="category-page-info">
+              <span className="page-info-category">
                 Page {currentPage} / {totalPages}
               </span>
-
               <button
-                onClick={() => handlePageChange(currentPage + 1)}
+                onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="category-btn-page"
+                className="btn-page-category"
               >
                 &gt;
               </button>
               <button
-                onClick={() => handlePageChange(totalPages)}
+                onClick={() => setCurrentPage(totalPages)}
                 disabled={currentPage === totalPages}
-                className="category-btn-page"
+                className="btn-page-category"
               >
                 &gt;&gt;
               </button>
@@ -348,20 +291,20 @@ const Category = () => {
           )}
 
           {showDeleteModal && (
-            <div className="category-modal-overlay">
-              <div className="category-modal-content">
+            <div className="modal-overlay-category">
+              <div className="modal-content-category">
                 <h2>Confirm Delete</h2>
                 <p>Are you sure you want to delete this category?</p>
-                <div className="category-modal-buttons">
+                <div className="modal-buttons-category">
                   <button
                     onClick={confirmDelete}
-                    className="category-modal-btn-confirm"
+                    className="modal-btn-confirm-category"
                   >
                     Delete
                   </button>
                   <button
                     onClick={cancelDelete}
-                    className="category-modal-btn-cancel"
+                    className="modal-btn-cancel-category"
                   >
                     Cancel
                   </button>
