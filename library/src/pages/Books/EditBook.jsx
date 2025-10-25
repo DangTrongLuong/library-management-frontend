@@ -70,7 +70,7 @@ const EditBook = () => {
         quantity: book.quantity,
       });
       if (book.imageUrl) {
-        setImagePreview(`http://localhost:8080${book.imageUrl}`);
+        setImagePreview(`http://localhost:8080/${book.imageUrl}`);
       }
       setLoading(false);
     } catch (error) {

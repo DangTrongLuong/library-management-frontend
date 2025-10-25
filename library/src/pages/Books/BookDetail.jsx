@@ -143,7 +143,7 @@ const DetailBook = () => {
               <div className="detail-book-image-section">
                 {book.imageUrl ? (
                   <img
-                    src={`http://localhost:8080${book.imageUrl}`}
+                    src={`http://localhost:8080/${book.imageUrl}`}
                     alt={book.bookTitle}
                     className="detail-book-image"
                     onError={(e) => {
