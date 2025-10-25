@@ -79,7 +79,7 @@ const CreateCategory = () => {
     }
 
     try {
-      await axios.post("/api/categories", formData);
+      await axios.post("/api/categories/createCategory", formData);
       toast.success("Category added successfully!");
       setTimeout(() => {
         navigate("/categorys");
