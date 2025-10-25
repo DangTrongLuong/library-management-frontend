@@ -162,14 +162,26 @@ const Report = () => {
                     <td>{report.content}</td>
                     <td>{report.creator?.username || "Unknown"}</td>
                     <td className="action-cell-report">
-                      <button className="btn-action-report btn-edit-report">
-                        Edit
+                      <button
+                        title="Edit"
+                        onClick={() => handleEdit(report.reportId)}
+                        className="btn btn-edit-report"
+                      >
+                        <Edit size={20} className="menu-action-report-icon" />
                       </button>
-                      <button className="btn-action-report btn-delete-report">
-                        Delete
+                      <button
+                        title="Delete"
+                        onClick={() => handleDelete(report.reportId)}
+                        className="btn btn-delete-report"
+                      >
+                        <Trash2 size={20} className="menu-action-report-icon" />
                       </button>
-                      <button className="btn-action-report btn-detail-report">
-                        Details
+                      <button
+                        title="Detail"
+                        onClick={() => handleDetail(report.reportId)}
+                        className="btn btn-detail-report"
+                      >
+                        <Eye size={20} className="menu-action-report-icon" />
                       </button>
                     </td>
                   </tr>
