@@ -12,6 +12,9 @@ const Report = () => {
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [sortField, setSortField] = useState("title");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredReports, setFilteredReports] = useState([]);
+  const itemsPerPage = 10;
   const sortDropdownRef = useRef(null);
 
   const handleMenuClick = (itemId) => setActiveMenuItem(itemId);
@@ -42,6 +45,8 @@ const Report = () => {
           "http://localhost:8080/api/reports/getAllReport"
         );
         setReports(response.data);
+        setFilteredReports(response.data);
+        setCurrentPage(1);
       } catch (error) {
         console.error("Error fetching reports:", error);
       } finally {
@@ -65,6 +70,30 @@ const Report = () => {
     alert("Điều hướng đến trang tạo báo cáo");
   };
 
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    const filtered = reports.filter(
+      (report) =>
+        report.reportId.toString().includes(term) ||
+        report.reportType.toLowerCase().includes(term) ||
+        report.content.toLowerCase().includes(term)
+    );
+    setFilteredReports(filtered);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
+
+  const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentReports = filteredReports.slice(startIndex, endIndex);
+
   return (
     <div className="my-project-container">
       <NavBar userName="Admin" onToggleSidebar={toggleSidebar} />
@@ -83,7 +112,7 @@ const Report = () => {
               type="text"
               placeholder="Search by title, category..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearch}
               className="report-search-input"
             />
 
@@ -128,8 +157,13 @@ const Report = () => {
             </button>
           </div>
           <table className="data-table-report">
-            <thead className="table-header-report">
-              <tr>
+            <thead>
+              <tr className="table-footer-report">
+                <th colSpan="7" className="footer-info-report">
+                  Total: {filteredReports.length} / {currentPage * itemsPerPage}
+                </th>
+              </tr>
+              <tr className="table-header-report">
                 <th>ID</th>
                 <th>Report Type</th>
                 <th>From Date</th>
@@ -146,14 +180,14 @@ const Report = () => {
                     Loading reports...
                   </td>
                 </tr>
-              ) : reports.length === 0 ? (
+              ) : currentReports.length === 0 ? (
                 <tr>
                   <td colSpan="7" className="no-data-report">
                     No reports found
                   </td>
                 </tr>
               ) : (
-                reports.map((report) => (
+                currentReports.map((report) => (
                   <tr key={report.reportId} className="table-row-report">
                     <td>{report.reportId}</td>
                     <td>{report.reportType}</td>
@@ -189,6 +223,46 @@ const Report = () => {
               )}
             </tbody>
           </table>
+
+          {filteredReports.length > 0 && (
+            <div className="pagination-report">
+              <button
+                onClick={() => handlePageChange(1)}
+                disabled={currentPage === 1}
+                className="btn-page-report"
+                title="First page"
+              >
+                &lt;&lt;
+              </button>
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="btn-page-report"
+                title="Previous page"
+              >
+                &lt;
+              </button>
+              <span className="page-info-report">
+                Page {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="btn-page-report"
+                title="Next page"
+              >
+                &gt;
+              </button>
+              <button
+                onClick={() => handlePageChange(totalPages)}
+                disabled={currentPage === totalPages}
+                className="btn-page-report"
+                title="Last page"
+              >
+                &gt;&gt;
+              </button>
+            </div>
+          )}
         </main>
       </div>
     </div>
