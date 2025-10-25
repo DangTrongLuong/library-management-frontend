@@ -281,7 +281,7 @@ const Books = () => {
                   <div className="books-card-image">
                     {book.imageUrl ? (
                       <img
-                        src={`http://localhost:8080/${book.imageUrl}`}
+                        src={`http://localhost:8080${book.imageUrl}`}
                         alt={book.bookTitle}
                         onError={(e) => {
                           e.target.src = "/placeholder-book.png";
