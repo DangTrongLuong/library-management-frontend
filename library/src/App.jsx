@@ -22,49 +22,209 @@ import EditBorrow from "./pages/Borrow/EditBorrow";
 import DetailBorrow from "./pages/Borrow/DetailBorrow";
 import Fine from "./pages/Fine/Fine";
 import Report from "./pages/Report";
+import LoginPage from "./pages/Login/Login";
+import { ProtectedRoute } from "./middlewares/ProtectedRoute";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import LoginPage from "./pages/Login/Login";
-import { Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/books/createBook" element={<CreateBook />} />
-        <Route path="/books/editBook/:id" element={<EditBook />} />
-        <Route path="/books/detailBook/:id" element={<DetailBook />} />
-        <Route path="/readers" element={<Reader />} />
-        <Route path="/readers/createReader" element={<CreateReader />} />
-        <Route path="/readers/editReader/:id" element={<EditReader />} />
-        <Route path="/readers/detailReader/:id" element={<DetailReader />} />
-        <Route path="/categorys" element={<Category />} />
-        <Route path="/categorys/createCategory" element={<CreateCategory />} />
-        <Route path="/categorys/editCategory/:id" element={<EditCategory />} />
-        <Route path="/librarians" element={<Librarian />} />
-        <Route
-          path="/librarians/createLibrarian"
-          element={<CreateLibrarian />}
-        />
-        <Route
-          path="/librarians/editLibrarian/:id"
-          element={<EditLibrarian />}
-        />
-        <Route
-          path="/librarians/detailLibrarian/:id"
-          element={<LibrarianDetail />}
-        />
-        <Route path="/borrows" element={<Borrow />} />
-        <Route path="/borrows/createBorrow" element={<CreateBorrow />} />
-        <Route path="/borrows/editBorrow/:id" element={<EditBorrow />} />
-        <Route path="/borrows/detailBorrow/:id" element={<DetailBorrow />} />
-        <Route path="/penalties" element={<Fine />} />
-        <Route path="/reports" element={<Report />} />
-      </Routes>
-    </Router>
+    <>
+      <ToastContainer autoClose={3000} />
+      <Router>
+        <Routes>
+          {/* Public route - không cần login */}
+          <Route path="/" element={<LoginPage />} />
+
+          {/* Protected routes - bắt buộc login */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/books"
+            element={
+              <ProtectedRoute>
+                <Books />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/books/createBook"
+            element={
+              <ProtectedRoute>
+                <CreateBook />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/books/editBook/:id"
+            element={
+              <ProtectedRoute>
+                <EditBook />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/books/detailBook/:id"
+            element={
+              <ProtectedRoute>
+                <DetailBook />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/readers"
+            element={
+              <ProtectedRoute>
+                <Reader />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/readers/createReader"
+            element={
+              <ProtectedRoute>
+                <CreateReader />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/readers/editReader/:id"
+            element={
+              <ProtectedRoute>
+                <EditReader />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/readers/detailReader/:id"
+            element={
+              <ProtectedRoute>
+                <DetailReader />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/categorys"
+            element={
+              <ProtectedRoute>
+                <Category />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/categorys/createCategory"
+            element={
+              <ProtectedRoute>
+                <CreateCategory />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/categorys/editCategory/:id"
+            element={
+              <ProtectedRoute>
+                <EditCategory />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/librarians"
+            element={
+              <ProtectedRoute>
+                <Librarian />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/librarians/createLibrarian"
+            element={
+              <ProtectedRoute>
+                <CreateLibrarian />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/librarians/editLibrarian/:id"
+            element={
+              <ProtectedRoute>
+                <EditLibrarian />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/librarians/detailLibrarian/:id"
+            element={
+              <ProtectedRoute>
+                <LibrarianDetail />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/borrows"
+            element={
+              <ProtectedRoute>
+                <Borrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/borrows/createBorrow"
+            element={
+              <ProtectedRoute>
+                <CreateBorrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/borrows/editBorrow/:id"
+            element={
+              <ProtectedRoute>
+                <EditBorrow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/borrows/detailBorrow/:id"
+            element={
+              <ProtectedRoute>
+                <DetailBorrow />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/penalties"
+            element={
+              <ProtectedRoute>
+                <Fine />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              <ProtectedRoute>
+                <Report />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 };
+
 export default App;
