@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import "../styles/Report.css";
 
+
+
 const Report = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("reports");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -104,6 +106,56 @@ const Report = () => {
               + Add Report
             </button>
           </div>
+          <table className="data-table-report">
+            <thead className="table-header-report">
+              <tr>
+                <th>ID</th>
+                <th>Report Type</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Content</th>
+                <th>Creator</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan="7" className="no-data-report">
+                    Loading reports...
+                  </td>
+                </tr>
+              ) : reports.length === 0 ? (
+                <tr>
+                  <td colSpan="7" className="no-data-report">
+                    No reports found
+                  </td>
+                </tr>
+              ) : (
+                reports.map((report) => (
+                  <tr key={report.reportId} className="table-row-report">
+                    <td>{report.reportId}</td>
+                    <td>{report.reportType}</td>
+                    <td>{formatDate(report.startDate)}</td>
+                    <td>{formatDate(report.endDate)}</td>
+                    <td>{report.content}</td>
+                    <td>{report.creator?.username || "Unknown"}</td>
+                    <td className="action-cell-report">
+                      <button className="btn-action-report btn-edit-report">
+                        Edit
+                      </button>
+                      <button className="btn-action-report btn-delete-report">
+                        Delete
+                      </button>
+                      <button className="btn-action-report btn-detail-report">
+                        Details
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </main>
       </div>
     </div>
