@@ -273,12 +273,11 @@ const Books = () => {
           <div className="books-grid">
             {Array.isArray(currentBooks) && currentBooks.length > 0 ? (
               currentBooks.map((book) => (
-                <div
-                  key={book.bookId}
-                  className="books-card"
-                  onClick={() => handleDetail(book.bookId)}
-                >
-                  <div className="books-card-image">
+                <div key={book.bookId} className="books-card">
+                  <div
+                    className="books-card-image"
+                    onClick={() => handleDetail(book.bookId)}
+                  >
                     {book.imageUrl ? (
                       <img
                         src={`http://localhost:8080/${book.imageUrl}`}
