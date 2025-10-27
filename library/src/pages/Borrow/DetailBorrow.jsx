@@ -195,6 +195,13 @@ const DetailBorrow = () => {
                 </div>
 
                 <div className="detail-borrow-info-item">
+                  <span className="detail-borrow-label">Borrow Price:</span>
+                  <span className="detail-borrow-value">
+                    {borrow.borrowPrice}
+                  </span>
+                </div>
+
+                <div className="detail-borrow-info-item">
                   <span className="detail-borrow-label">Status:</span>
                   <span
                     className="detail-borrow-value"

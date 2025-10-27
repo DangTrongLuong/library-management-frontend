@@ -292,17 +292,16 @@ const Books = () => {
                   </div>
 
                   <div className="books-card-content">
-                    <h3 className="books-card-title">{book.bookTitle}</h3>
+                    <h3 className="books-card-title">
+                      <strong>Book Name:</strong> {book.bookTitle}{" "}
+                      {/* <span style={{ fontSize: "14px" }}>({book.bookId})</span> */}
+                    </h3>
                     <p className="books-card-author">
                       <strong>Author:</strong> {book.author}
                     </p>
 
                     <p className="books-card-quantity">
                       <strong>Quantity:</strong> {book.quantity}
-                    </p>
-
-                    <p className="books-card-price">
-                      <strong>Price:</strong> ${book.price}
                     </p>
                   </div>
 

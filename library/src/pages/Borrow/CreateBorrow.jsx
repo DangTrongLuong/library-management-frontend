@@ -17,6 +17,7 @@ const CreateBorrow = () => {
     bookId: "",
     borrowDate: "",
     dueDate: "",
+    borrowPrice: "",
     notes: "",
   });
   const [readerName, setReaderName] = useState("");
@@ -100,6 +101,10 @@ const CreateBorrow = () => {
       new Date(formData.dueDate) < new Date(formData.borrowDate)
     ) {
       newErrors.dueDate = "Due date cannot be before borrow date";
+    }
+
+    if (!formData.borrowPrice || parseFloat(formData.borrowPrice) <= 0) {
+      newErrors.borrowPrice = "Price is required and must be positive";
     }
 
     setErrors(newErrors);
@@ -271,30 +276,29 @@ const CreateBorrow = () => {
                       )}
                     </div>
                   </div>
+                  <div className="create-borrow-group" hidden>
+                    <label htmlFor="borrowDate">
+                      Borrow Date{" "}
+                      <span className="create-borrow-required">*</span>
+                    </label>
+                    <input
+                      id="borrowDate"
+                      name="borrowDate"
+                      type="date"
+                      value={new Date().toISOString().split("T")[0]}
+                      onChange={handleChange}
+                      className={`create-borrow-input ${
+                        errors.borrowDate ? "error" : ""
+                      }`}
+                    />
+                    {errors.borrowDate && (
+                      <span className="create-borrow-error">
+                        {errors.borrowDate}
+                      </span>
+                    )}
+                  </div>
 
                   <div className="create-borrow-row">
-                    <div className="create-borrow-group" hidden>
-                      <label htmlFor="borrowDate">
-                        Borrow Date{" "}
-                        <span className="create-borrow-required">*</span>
-                      </label>
-                      <input
-                        id="borrowDate"
-                        name="borrowDate"
-                        type="date"
-                        value={new Date().toISOString().split("T")[0]}
-                        onChange={handleChange}
-                        className={`create-borrow-input ${
-                          errors.borrowDate ? "error" : ""
-                        }`}
-                      />
-                      {errors.borrowDate && (
-                        <span className="create-borrow-error">
-                          {errors.borrowDate}
-                        </span>
-                      )}
-                    </div>
-
                     <div className="create-borrow-group">
                       <label htmlFor="dueDate">
                         Due Date{" "}
@@ -307,6 +311,30 @@ const CreateBorrow = () => {
                         min={new Date().toISOString().split("T")[0]}
                         value={formData.dueDate}
                         onChange={handleChange}
+                        className={`create-borrow-input ${
+                          errors.dueDate ? "error" : ""
+                        }`}
+                      />
+                      {errors.dueDate && (
+                        <span className="create-borrow-error">
+                          {errors.dueDate}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="create-borrow-group">
+                      <label htmlFor="borrowPrice">
+                        Borrow Price{" "}
+                        <span className="create-borrow-required">*</span>
+                      </label>
+                      <input
+                        id="borrowPrice"
+                        name="borrowPrice"
+                        type="number"
+                        min="1"
+                        value={formData.borrowPrice}
+                        onChange={handleChange}
+                        placeholder="Enter borroe price"
                         className={`create-borrow-input ${
                           errors.dueDate ? "error" : ""
                         }`}
