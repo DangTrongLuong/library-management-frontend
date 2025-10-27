@@ -236,9 +236,7 @@ const EditLibrarian = () => {
                   <h2>Personal Information</h2>
 
                   <div className="edit-form-group-librarian">
-                    <label htmlFor="librarianName">
-                      Name <span className="edit-required">*</span>
-                    </label>
+                    <label htmlFor="librarianName">Name</label>
                     <input
                       id="librarianName"
                       name="librarianName"
@@ -258,9 +256,7 @@ const EditLibrarian = () => {
 
                   <div className="edit-form-row-librarian">
                     <div className="edit-form-group-librarian">
-                      <label htmlFor="phone">
-                        Phone <span className="edit-required">*</span>
-                      </label>
+                      <label htmlFor="phone">Phone</label>
                       <input
                         id="phone"
                         name="phone"
@@ -279,9 +275,7 @@ const EditLibrarian = () => {
                     </div>
 
                     <div className="edit-form-group-librarian">
-                      <label htmlFor="email">
-                        Email <span className="edit-required">*</span>
-                      </label>
+                      <label htmlFor="email">Email</label>
                       <input
                         id="email"
                         name="email"
@@ -303,9 +297,7 @@ const EditLibrarian = () => {
 
                   <div className="edit-form-row-librarian">
                     <div className="edit-form-group-librarian">
-                      <label htmlFor="gender">
-                        Gender <span className="edit-required">*</span>
-                      </label>
+                      <label htmlFor="gender">Gender</label>
                       <select
                         id="gender"
                         name="gender"
@@ -328,9 +320,7 @@ const EditLibrarian = () => {
                     </div>
 
                     <div className="edit-form-group-librarian">
-                      <label htmlFor="startDate">
-                        Start Date <span className="edit-required">*</span>
-                      </label>
+                      <label htmlFor="startDate">Start Date</label>
                       <input
                         id="startDate"
                         name="startDate"
@@ -351,9 +341,7 @@ const EditLibrarian = () => {
                   </div>
 
                   <div className="edit-form-group-librarian">
-                    <label htmlFor="address">
-                      Address <span className="edit-required">*</span>
-                    </label>
+                    <label htmlFor="address">Address</label>
                     <input
                       id="address"
                       name="address"
@@ -377,9 +365,7 @@ const EditLibrarian = () => {
 
                   <div className="edit-form-row-librarian">
                     <div className="edit-form-group-librarian">
-                      <label htmlFor="shiftId">
-                        Shift <span className="edit-required">*</span>
-                      </label>
+                      <label htmlFor="shiftId">Shift</label>
                       <select
                         id="shiftId"
                         name="shiftName"
@@ -409,10 +395,7 @@ const EditLibrarian = () => {
                     </div>
 
                     <div className="edit-form-group-librarian">
-                      <label htmlFor="hourlyWage">
-                        Hourly Wage (VND){" "}
-                        <span className="edit-required">*</span>
-                      </label>
+                      <label htmlFor="hourlyWage">Hourly Wage (VND) </label>
                       <input
                         id="hourlyWage"
                         name="hourlyWage"
@@ -434,9 +417,7 @@ const EditLibrarian = () => {
                   </div>
 
                   <div className="edit-form-group-librarian">
-                    <label htmlFor="status">
-                      Status <span className="edit-required">*</span>
-                    </label>
+                    <label htmlFor="status">Status</label>
                     <select
                       id="status"
                       name="status"

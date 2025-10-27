@@ -195,9 +195,7 @@ const EditReader = () => {
 
                 <div className="edit-reader-row">
                   <div className="edit-reader-group">
-                    <label htmlFor="name">
-                      Full Name <span className="edit-reader-required">*</span>
-                    </label>
+                    <label htmlFor="name">Full Name</label>
                     <div className="edit-reader-input-wrapper">
                       <input
                         id="name"
@@ -216,10 +214,7 @@ const EditReader = () => {
                   </div>
 
                   <div className="edit-reader-group">
-                    <label htmlFor="numberPhone">
-                      Phone Number{" "}
-                      <span className="edit-reader-required">*</span>
-                    </label>
+                    <label htmlFor="numberPhone">Phone Number </label>
                     <div className="edit-reader-input-wrapper">
                       <input
                         id="numberPhone"
@@ -242,9 +237,7 @@ const EditReader = () => {
 
                 <div className="edit-reader-row">
                   <div className="edit-reader-group">
-                    <label htmlFor="email">
-                      Email <span className="edit-reader-required">*</span>
-                    </label>
+                    <label htmlFor="email">Email</label>
                     <div className="edit-reader-input-wrapper">
                       <input
                         id="email"
@@ -264,9 +257,7 @@ const EditReader = () => {
                   </div>
 
                   <div className="edit-reader-group">
-                    <label htmlFor="cardType">
-                      Card Type <span className="edit-reader-required">*</span>
-                    </label>
+                    <label htmlFor="cardType">Card Type</label>
                     <select
                       id="cardType"
                       name="cardType"
@@ -289,24 +280,26 @@ const EditReader = () => {
                   </div>
                 </div>
 
-                <div className="edit-reader-group">
-                  <label htmlFor="address">Address</label>
-                  <div className="edit-reader-input-wrapper">
-                    <input
-                      id="address"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleChange}
-                      placeholder="Enter address"
-                      className="edit-reader-input"
-                    />
-                  </div>
-                  {errors.address && (
-                    <span className="edit-reader-error">{errors.address}</span>
-                  )}
-                </div>
-
                 <div className="edit-reader-row">
+                  <div className="edit-reader-group">
+                    <label htmlFor="address">Address</label>
+                    <div className="edit-reader-input-wrapper">
+                      <input
+                        id="address"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        placeholder="Enter address"
+                        className="edit-reader-input"
+                      />
+                    </div>
+                    {errors.address && (
+                      <span className="edit-reader-error">
+                        {errors.address}
+                      </span>
+                    )}
+                  </div>
+
                   <div className="edit-reader-group-date">
                     <label htmlFor="registrationDate">Registration Date</label>
                     <div className="edit-reader-input-wrapper">

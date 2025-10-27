@@ -266,9 +266,7 @@ const EditBook = () => {
                   <h2>Book Information</h2>
 
                   <div className="edit-book-group">
-                    <label htmlFor="bookTitle">
-                      Book Title <span className="edit-book-required">*</span>
-                    </label>
+                    <label htmlFor="bookTitle">Book Title</label>
                     <input
                       id="bookTitle"
                       name="bookTitle"
@@ -288,9 +286,7 @@ const EditBook = () => {
 
                   <div className="edit-book-row">
                     <div className="edit-book-group">
-                      <label htmlFor="author">
-                        Author <span className="edit-book-required">*</span>
-                      </label>
+                      <label htmlFor="author">Author</label>
                       <input
                         id="author"
                         name="author"
@@ -307,10 +303,7 @@ const EditBook = () => {
                     </div>
 
                     <div className="edit-book-group">
-                      <label htmlFor="publicationYear">
-                        Publication Year{" "}
-                        <span className="edit-book-required">*</span>
-                      </label>
+                      <label htmlFor="publicationYear">Publication Year </label>
                       <input
                         id="publicationYear"
                         name="publicationYear"
@@ -334,9 +327,7 @@ const EditBook = () => {
 
                   <div className="edit-book-row">
                     <div className="edit-book-group">
-                      <label htmlFor="categoryId">
-                        Category <span className="edit-book-required">*</span>
-                      </label>
+                      <label htmlFor="categoryId">Category</label>
                       <select
                         id="categoryId"
                         name="categoryId"
@@ -374,9 +365,7 @@ const EditBook = () => {
                   </div>
 
                   <div className="edit-book-group">
-                    <label htmlFor="quantity">
-                      Quantity <span className="edit-book-required">*</span>
-                    </label>
+                    <label htmlFor="quantity">Quantity</label>
                     <input
                       id="quantity"
                       name="quantity"
