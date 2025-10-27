@@ -9,6 +9,8 @@ import {
   Package,
   Book,
   Edit as EditIcon,
+  DollarSign,
+  Wallet,
 } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
@@ -190,6 +192,20 @@ const DetailBook = () => {
                   <Package size={20} className="detail-book-icon" />
                   <span className="detail-book-label">Quantity:</span>
                   <span className="detail-book-value">{book.quantity}</span>
+                </div>
+
+                <div className="detail-book-info-item">
+                  <DollarSign size={20} className="detail-book-icon" />
+                  <span className="detail-book-label">Price:</span>
+                  <span className="detail-book-value">${book.price}</span>
+                </div>
+
+                <div className="detail-book-info-item">
+                  <Wallet size={20} className="detail-book-icon" />
+                  <span className="detail-book-label">Total Price:</span>
+                  <span className="detail-book-value">
+                    ${book.price * book.quantity}
+                  </span>
                 </div>
               </div>
             </div>

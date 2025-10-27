@@ -22,6 +22,7 @@ const CreateBook = () => {
     categoryId: "",
     nxb: "",
     quantity: 0,
+    price: "",
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -82,6 +83,10 @@ const CreateBook = () => {
       newErrors.quantity = "Quantity must be >= 0";
     }
 
+    if (!formData.price || parseFloat(formData.price) <= 0) {
+      newErrors.price = "Price is required and must be positive";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -136,6 +141,7 @@ const CreateBook = () => {
       formDataToSend.append("categoryId", formData.categoryId);
       formDataToSend.append("nxb", formData.nxb || "");
       formDataToSend.append("quantity", formData.quantity);
+      formDataToSend.append("price", formData.price);
 
       if (imageFile) {
         formDataToSend.append("image", imageFile);
@@ -343,6 +349,27 @@ const CreateBook = () => {
                       <span className="create-book-error">
                         {errors.quantity}
                       </span>
+                    )}
+                  </div>
+
+                  <div className="create-book-group">
+                    <label>
+                      Price <span className="create-book-required">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleChange}
+                      placeholder="Enter price"
+                      min="1"
+                      step="1"
+                      className={`create-book-input ${
+                        errors.price ? "error" : ""
+                      }`}
+                    />
+                    {errors.price && (
+                      <span className="create-book-error">{errors.price}</span>
                     )}
                   </div>
                 </div>

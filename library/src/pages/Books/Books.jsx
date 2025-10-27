@@ -296,14 +296,13 @@ const Books = () => {
                     <p className="books-card-author">
                       <strong>Author:</strong> {book.author}
                     </p>
-                    <p className="books-card-info">
-                      <strong>Year:</strong> {book.publicationYear}
-                    </p>
-                    <p className="books-card-info">
-                      <strong>Category:</strong> {book.categoryName || "N/A"}
-                    </p>
+
                     <p className="books-card-quantity">
                       <strong>Quantity:</strong> {book.quantity}
+                    </p>
+
+                    <p className="books-card-price">
+                      <strong>Price:</strong> ${book.price}
                     </p>
                   </div>
 
