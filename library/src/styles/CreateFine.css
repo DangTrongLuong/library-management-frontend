@@ -1,0 +1,183 @@
+/*Trải nghiệm AI ngay trong các ứng dụng bạn yêu thích … Dùng Gemini để tạo bản nháp và tinh chỉnh nội dung, đồng thời sử dụng Gemini Pro để khai thác AI thế hệ mới của Google với giá 489.000 ₫ 0 ₫ cho 1 tháng
+/* ============================
+   CREATE FINE - UNIFIED STYLE
+   (Same theme as Reader Form)
+============================ */
+
+.create-fine-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.create-fine-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.create-fine-h1 {
+  font-size: 26px;
+  color: #093765;
+  font-weight: 600;
+  margin: 0;
+}
+
+.create-fine-btn-back {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.create-fine-btn-back:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* Form */
+.create-fine-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Group */
+.create-fine-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.create-fine-group label {
+  font-weight: 600;
+  color: #093765;
+  font-size: 15px;
+}
+
+.create-fine-required {
+  color: #dc3545;
+}
+
+/* Inputs */
+.create-fine-input,
+.create-fine-select,
+.create-fine-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.create-fine-input:focus,
+.create-fine-select:focus,
+.create-fine-textarea:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+  outline: none;
+}
+
+/* Error state */
+.create-fine-input.error,
+.create-fine-select.error,
+.create-fine-textarea.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+/* Notes */
+.create-fine-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Two-column layout */
+.create-fine-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.create-fine-row .create-fine-group {
+  flex: 1;
+}
+
+/* Actions */
+.create-fine-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.create-fine-btn-submit,
+.create-fine-btn-cancel {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.create-fine-btn-submit {
+  background-color: #28a745;
+  color: #fff;
+  min-width: 150px;
+}
+
+.create-fine-btn-submit:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.create-fine-btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+  min-width: 150px;
+}
+
+.create-fine-btn-cancel:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .create-fine-wrapper {
+    padding: 20px;
+  }
+
+  .create-fine-row {
+    grid-template-columns: 1fr;
+  }
+
+  .create-fine-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .create-fine-btn-submit,
+  .create-fine-btn-cancel {
+    width: 100%;
+  }
+}
