@@ -19,6 +19,7 @@ const EditBorrow = () => {
     bookId: "",
     borrowDate: "",
     dueDate: "",
+    borrowPrice: "",
     notes: "",
     status: "BORROWED",
   });
@@ -53,6 +54,7 @@ const EditBorrow = () => {
         bookId: response.data.bookId,
         borrowDate: response.data.borrowDate,
         dueDate: response.data.dueDate,
+        borrowPrice: response.data.borrowPrice,
         notes: response.data.notes || "",
         status: response.data.status || "BORROWED",
       });
@@ -123,6 +125,10 @@ const EditBorrow = () => {
       new Date(formData.dueDate) < new Date(formData.borrowDate)
     ) {
       newErrors.dueDate = "Due date cannot be before borrow date";
+    }
+
+    if (!formData.borrowPrice || parseFloat(formData.borrowPrice) <= 0) {
+      newErrors.borrowPrice = "Price is required and must be positive";
     }
 
     setErrors(newErrors);
@@ -341,19 +347,45 @@ const EditBorrow = () => {
                       )}
                     </div>
                   </div>
-                  <div className="edit-borrow-group">
-                    <label htmlFor="status">Status</label>
-                    <select
-                      id="status"
-                      name="status"
-                      value={formData.status}
-                      onChange={handleChange}
-                      className="edit-borrow-select"
-                    >
-                      <option value="BORROWED">Borrowed</option>
-                      <option value="RETURNED">Returned</option>
-                      <option value="OVERDUE">Overdue</option>
-                    </select>
+                  <div className="edit-borrow-row">
+                    <div className="edit-borrow-group">
+                      <label htmlFor="borrowPrice">
+                        Borrow Price{" "}
+                        <span className="edit-borrow-required">*</span>
+                      </label>
+                      <input
+                        id="borrowPrice"
+                        name="borrowPrice"
+                        type="number"
+                        min="1"
+                        value={formData.borrowPrice}
+                        onChange={handleChange}
+                        placeholder="Enter borroe price"
+                        className={`edit-borrow-input ${
+                          errors.dueDate ? "error" : ""
+                        }`}
+                      />
+                      {errors.dueDate && (
+                        <span className="edit-borrow-error">
+                          {errors.dueDate}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="edit-borrow-group">
+                      <label htmlFor="status">Status</label>
+                      <select
+                        id="status"
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        className="edit-borrow-select"
+                      >
+                        <option value="BORROWED">Borrowed</option>
+                        <option value="RETURNED">Returned</option>
+                        <option value="OVERDUE">Overdue</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div className="edit-borrow-group">

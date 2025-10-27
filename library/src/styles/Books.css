@@ -3,7 +3,7 @@
   margin: 0 0 25px 0;
 
   color: #093765;
-  font-weight: 600;
+  font-weight: 500;
   padding: 0 0 10px 0;
   border-bottom: 2px solid #e0e0e0;
   margin-bottom: 20px;
@@ -158,7 +158,7 @@
 /* Books Grid */
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
   margin-bottom: 30px;
 }
@@ -182,7 +182,7 @@
 
 .books-card-image {
   width: 100%;
-  height: 320px;
+  height: 300px;
   background-color: #f0f0f0;
   display: flex;
   align-items: center;
@@ -224,7 +224,8 @@
 
 .books-card-author,
 .books-card-info,
-.books-card-quantity {
+.books-card-quantity,
+.books-card-title {
   margin: 0;
   font-size: 14px;
   color: #093765;
@@ -234,7 +235,8 @@
 .books-card-author strong,
 .books-card-info strong,
 .books-card-quantity strong,
-.books-card-price strong {
+.books-card-price strong,
+.books-card-title strong {
   color: #093765;
   font-weight: 600;
 }

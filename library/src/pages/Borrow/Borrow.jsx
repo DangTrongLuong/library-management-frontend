@@ -13,6 +13,7 @@ const Borrow = () => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [borrows, setBorrows] = useState([]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBorrows, setFilteredBorrows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -323,12 +324,13 @@ const Borrow = () => {
               <thead>
                 <tr>
                   <th>Borrow ID</th>
-                  <th>Reader ID</th>
+
                   <th>Reader Name</th>
-                  <th>Book ID</th>
+
                   <th>Book Title</th>
                   <th>Borrow Date</th>
                   <th>Due Date</th>
+                  <th>Borrow Price</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -338,12 +340,13 @@ const Borrow = () => {
                   currentBorrows.map((borrow) => (
                     <tr key={borrow.borrowId}>
                       <td>{borrow.borrowId}</td>
-                      <td>{borrow.readerId}</td>
+
                       <td>{borrow.readerName}</td>
-                      <td>{borrow.bookId}</td>
+
                       <td>{borrow.bookTitle}</td>
                       <td>{borrow.borrowDate}</td>
                       <td>{borrow.dueDate}</td>
+                      <td>{borrow.borrowPrice} VND</td>
                       <td
                         style={{
                           color:

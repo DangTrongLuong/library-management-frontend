@@ -3,6 +3,8 @@ main .category-management {
   padding: 0 0 10px 0;
   border-bottom: 2px solid #e0e0e0;
   margin-bottom: 20px;
+  font-size: 38px;
+  font-weight: 500;
 }
 /* Controls Section */
 .controls-category {
