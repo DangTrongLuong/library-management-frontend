@@ -1,8 +1,7 @@
-//Trải nghiệm AI ngay trong các ứng dụng bạn yêu thích … Dùng Gemini để tạo bản nháp và tinh chỉnh nội dung, đồng thời sử dụng Gemini Pro để khai thác AI thế hệ mới của Google với giá 489.000 ₫ 0 ₫ cho 1 tháng
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,6 +15,7 @@ const CreateFine = () => {
   const navigate = useNavigate();
 
   const [borrows, setBorrows] = useState([]);
+  const [calculatingAmount, setCalculatingAmount] = useState(false);
   const [formData, setFormData] = useState({
     borrowId: "",
     reason: "",
@@ -25,15 +25,18 @@ const CreateFine = () => {
   });
   const [errors, setErrors] = useState({});
 
-  // 🟩 Load borrow list
+  const reasonOptions = [
+    { value: "LOST_BOOK", label: "Lost Book" },
+    { value: "DAMAGED_BOOK", label: "Damaged Book" },
+    { value: "OVERDUE", label: "Overdue" },
+  ];
+
+  // Load borrow list
   useEffect(() => {
-    axios
-      axios.get("http://localhost:8080/api/borrows/getAllBorrows")
-      .then((res) => setBorrows(res.data))
-      .catch(() => toast.error("Failed to load borrow records!"));
+    fetchBorrows();
   }, []);
 
-  // 🟦 Active sidebar highlight
+  // Active sidebar highlight
   useEffect(() => {
     const pathToItem = {
       "/dashboard": "home",
@@ -48,7 +51,45 @@ const CreateFine = () => {
     setActiveMenuItem(pathToItem[location.pathname] || "penalties");
   }, [location.pathname]);
 
-  // 🟨 Validation
+  const fetchBorrows = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/borrows/getAllBorrows"
+      );
+      setBorrows(response.data);
+    } catch (error) {
+      toast.error("Failed to load borrow records!");
+      console.error("Error fetching borrows:", error);
+    }
+  };
+
+  // Calculate fine amount when reason changes
+  const calculateAmount = async (borrowId, reason) => {
+    if (!borrowId || !reason) {
+      setFormData((prev) => ({ ...prev, amount: "" }));
+      return;
+    }
+
+    setCalculatingAmount(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/fines/calculate-amount",
+        {
+          borrowId: borrowId,
+          reason: reason,
+        }
+      );
+      setFormData((prev) => ({ ...prev, amount: response.data.toString() }));
+    } catch (error) {
+      console.error("Error calculating amount:", error);
+      toast.error("Failed to calculate fine amount!");
+      setFormData((prev) => ({ ...prev, amount: "" }));
+    } finally {
+      setCalculatingAmount(false);
+    }
+  };
+
+  // Validation
   const validateForm = () => {
     const newErrors = {};
 
@@ -74,16 +115,37 @@ const CreateFine = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // 🟩 Handle input
+  // Handle input
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const updatedData = { ...formData, [name]: value };
+    setFormData(updatedData);
+
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" });
     }
+
+    // Auto-calculate amount when reason changes
+    if (name === "reason") {
+      calculateAmount(formData.borrowId, value);
+    }
   };
 
-  // 🟧 Submit form
+  const handleBorrowChange = (e) => {
+    const borrowId = e.target.value;
+    setFormData({ ...formData, borrowId });
+
+    if (errors.borrowId) {
+      setErrors({ ...errors, borrowId: "" });
+    }
+
+    // Re-calculate amount with new borrow if reason is already selected
+    if (formData.reason) {
+      calculateAmount(borrowId, formData.reason);
+    }
+  };
+
+  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -96,9 +158,8 @@ const CreateFine = () => {
       await axios.post("http://localhost:8080/api/fines", {
         borrowId: formData.borrowId,
         reason: formData.reason,
-        amount: parseFloat(formData.amount),
         paymentStatus: formData.paymentStatus,
-        notes: formData.notes,
+        notes: formData.notes || null,
       });
 
       toast.success("Fine added successfully!");
@@ -162,34 +223,36 @@ const CreateFine = () => {
                 <div className="create-fine-row">
                   <div className="create-fine-group">
                     <label htmlFor="borrowId">
-                      Borrow Record <span className="create-fine-required">*</span>
+                      Borrow Record{" "}
+                      <span className="create-fine-required">*</span>
                     </label>
                     <select
                       id="borrowId"
                       name="borrowId"
                       value={formData.borrowId}
-                      onChange={handleChange}
+                      onChange={handleBorrowChange}
                       className={`create-fine-input ${
                         errors.borrowId ? "error" : ""
                       }`}
                     >
-
-                   <option value="">Select Borrow Record</option>
-                     {borrows.map((b) => (
-                   <option key={b.borrowId} value={b.borrowId}>
-                     {b.borrowCode || `Record #${b.borrowId}`}
-                   </option>
-                    ))}
-
+                      <option value="">Select Borrow Record</option>
+                      {borrows.map((b) => (
+                        <option key={b.borrowId} value={b.borrowId}>
+                          {b.borrowId} — {b.readerName}
+                        </option>
+                      ))}
                     </select>
                     {errors.borrowId && (
-                      <span className="create-fine-error">{errors.borrowId}</span>
+                      <span className="create-fine-error">
+                        {errors.borrowId}
+                      </span>
                     )}
                   </div>
 
                   <div className="create-fine-group">
                     <label htmlFor="reason">
-                      Fine Reason <span className="create-fine-required">*</span>
+                      Fine Reason{" "}
+                      <span className="create-fine-required">*</span>
                     </label>
                     <select
                       id="reason"
@@ -201,9 +264,11 @@ const CreateFine = () => {
                       }`}
                     >
                       <option value="">Select Reason</option>
-                      <option value="LATE_RETURN">Late Return</option>
-                      <option value="DAMAGED_BOOK">Damaged Book</option>
-                      <option value="LOST_BOOK">Lost Book</option>
+                      {reasonOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
                     </select>
                     {errors.reason && (
                       <span className="create-fine-error">{errors.reason}</span>
@@ -216,6 +281,9 @@ const CreateFine = () => {
                     <label htmlFor="amount">
                       Fine Amount (VND){" "}
                       <span className="create-fine-required">*</span>
+                      {calculatingAmount && (
+                        <Loader size={16} className="inline animate-spin" />
+                      )}
                     </label>
                     <input
                       id="amount"
@@ -223,7 +291,8 @@ const CreateFine = () => {
                       type="number"
                       value={formData.amount}
                       onChange={handleChange}
-                      placeholder="Enter fine amount"
+                      placeholder="Amount will be calculated"
+                      readOnly
                       className={`create-fine-input ${
                         errors.amount ? "error" : ""
                       }`}

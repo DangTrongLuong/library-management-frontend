@@ -128,9 +128,7 @@ const DetailFine = () => {
             >
               <ArrowLeft size={20} />
             </button>
-            <h1 className="detail-fine-h1">
-              Fine Management / Fine Details
-            </h1>
+            <h1 className="detail-fine-h1">Fine Management / Fine Details</h1>
           </div>
 
           <div className="detail-fine-wrapper">
@@ -146,7 +144,7 @@ const DetailFine = () => {
 
                 <div className="detail-fine-info-item">
                   <span className="detail-fine-label">Fine ID:</span>
-                  <span className="detail-fine-value">{fine.fineId}</span>
+                  <span className="detail-fine-value">{fine.id}</span>
                 </div>
 
                 <div className="detail-fine-info-item">
@@ -156,9 +154,7 @@ const DetailFine = () => {
 
                 <div className="detail-fine-info-item">
                   <span className="detail-fine-label">Fine Amount:</span>
-                  <span className="detail-fine-value">
-                    {fine.amount} VND
-                  </span>
+                  <span className="detail-fine-value">{fine.amount} VND</span>
                 </div>
 
                 <div className="detail-fine-info-item">
@@ -173,7 +169,15 @@ const DetailFine = () => {
 
                 <div className="detail-fine-info-item">
                   <span className="detail-fine-label">Status:</span>
-                  <span className="detail-fine-value">{fine.status}</span>
+                  <span
+                    className={`detail-fine-value ${
+                      fine.paymentStatus === "PAID"
+                        ? "status-paid"
+                        : "status-unpaid"
+                    }`}
+                  >
+                    {fine.paymentStatus}
+                  </span>
                 </div>
 
                 <div className="detail-fine-info-item">
