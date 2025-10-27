@@ -223,10 +223,7 @@ const EditBorrow = () => {
 
                   <div className="edit-borrow-row">
                     <div className="edit-borrow-group">
-                      <label htmlFor="readerId">
-                        Reader ID{" "}
-                        <span className="edit-borrow-required">*</span>
-                      </label>
+                      <label htmlFor="readerId">Reader ID </label>
                       <input
                         id="readerId"
                         name="readerId"
@@ -266,9 +263,7 @@ const EditBorrow = () => {
                     </div>
 
                     <div className="edit-borrow-group">
-                      <label htmlFor="bookId">
-                        Book ID <span className="edit-borrow-required">*</span>
-                      </label>
+                      <label htmlFor="bookId">Book ID</label>
                       <input
                         id="bookId"
                         name="bookId"
@@ -307,15 +302,12 @@ const EditBorrow = () => {
 
                   <div className="edit-borrow-row">
                     <div className="edit-borrow-group">
-                      <label htmlFor="borrowDate">
-                        Borrow Date{" "}
-                        <span className="edit-borrow-required">*</span>
-                      </label>
+                      <label htmlFor="borrowDate">Borrow Date </label>
                       <input
                         id="borrowDate"
                         name="borrowDate"
                         type="date"
-                        min={new Date().toISOString().split("T")[0]}
+                        // min={new Date().toISOString().split("T")[0]}
                         value={formData.borrowDate}
                         onChange={handleChange}
                         className={`edit-borrow-input ${
@@ -330,14 +322,12 @@ const EditBorrow = () => {
                     </div>
 
                     <div className="edit-borrow-group">
-                      <label htmlFor="dueDate">
-                        Due Date <span className="edit-borrow-required">*</span>
-                      </label>
+                      <label htmlFor="dueDate">Due Date</label>
                       <input
                         id="dueDate"
                         name="dueDate"
                         type="date"
-                        min={new Date().toISOString().split("T")[0]}
+                        // min={new Date().toISOString().split("T")[0]}
                         value={formData.dueDate}
                         onChange={handleChange}
                         className={`edit-borrow-input ${
@@ -352,9 +342,7 @@ const EditBorrow = () => {
                     </div>
                   </div>
                   <div className="edit-borrow-group">
-                    <label htmlFor="status">
-                      Status <span className="edit-borrow-required">*</span>
-                    </label>
+                    <label htmlFor="status">Status</label>
                     <select
                       id="status"
                       name="status"
