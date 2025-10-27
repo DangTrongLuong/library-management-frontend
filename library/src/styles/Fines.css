@@ -1,0 +1,99 @@
+
+.fines-management {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.controls-fines {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input-fines {
+  padding: 8px;
+  font-size: 16px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-add-fines {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.data-table-fines {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.data-table-fines th,
+.data-table-fines td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+} 
+
+.data-table-fines th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.action-cell-fines button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete-fines {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-overlay-fines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-fines {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+}
+
+.modal-buttons-fines button {
+  margin: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-btn-confirm-fines {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-btn-cancel-fines {
+  background-color: #ccc;
+  color: black;
+}
