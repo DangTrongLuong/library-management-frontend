@@ -1,3 +1,4 @@
+//Trải nghiệm AI ngay trong các ứng dụng bạn yêu thích … Dùng Gemini để tạo bản nháp và tinh chỉnh nội dung, đồng thời sử dụng Gemini Pro để khai thác AI thế hệ mới của Google với giá 489.000 ₫ 0 ₫ cho 1 tháng
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
@@ -21,6 +22,9 @@ import CreateBorrow from "./pages/Borrow/CreateBorrow";
 import EditBorrow from "./pages/Borrow/EditBorrow";
 import DetailBorrow from "./pages/Borrow/DetailBorrow";
 import Fine from "./pages/Fine/Fine";
+import CreateFine from "./pages/Fine/CreateFine";
+import EditFine from "./pages/Fine/EditFine";
+import DetailFine from "./pages/Fine/DetailsFine";
 import Report from "./pages/Report";
 import LoginPage from "./pages/Login/Login";
 import { ProtectedRoute } from "./middlewares/ProtectedRoute";
@@ -204,15 +208,44 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          {/* Fine (Khoản phạt) */}
+{/* Fine (Khoản phạt) */}
+<Route
+  path="/penalties"
+  element={
+    <ProtectedRoute>
+      <Fine />
+    </ProtectedRoute>
+  }
+/>
 
-          <Route
-            path="/penalties"
-            element={
-              <ProtectedRoute>
-                <Fine />
-              </ProtectedRoute>
-            }
-          />
+<Route
+  path="/penalties/create"
+  element={
+    <ProtectedRoute>
+      <CreateFine />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/penalties/edit/:id"
+  element={
+    <ProtectedRoute>
+      <EditFine />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/penalties/detail/:id"
+  element={
+    <ProtectedRoute>
+      <DetailFine />
+    </ProtectedRoute>
+  }
+/>
+
+
+
           <Route
             path="/reports"
             element={

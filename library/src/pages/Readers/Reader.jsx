@@ -32,7 +32,6 @@ const Reader = () => {
       "/books": "books",
       "/readers": "readers",
       "/categorys": "category",
-      "/readers": "readers",
       "/borrows": "borrows",
       "/penalties": "penalties",
       "/reports": "reports",

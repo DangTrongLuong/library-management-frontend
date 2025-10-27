@@ -1,5 +1,6 @@
+//Trải nghiệm AI ngay trong các ứng dụng bạn yêu thích … Dùng Gemini để tạo bản nháp và tinh chỉnh nội dung, đồng thời sử dụng Gemini Pro để khai thác AI thế hệ mới của Google với giá 489.000 ₫ 0 ₫ cho 1 tháng
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { format } from "date-fns";
 import { ChevronDown } from "lucide-react";
@@ -10,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../styles/Fine.css";
 
 const Fine = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [activeMenuItem, setActiveMenuItem] = useState("penalties");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -19,15 +21,16 @@ const Fine = () => {
   const [sortOrder, setSortOrder] = useState("desc");
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
   const sortDropdownRef = useRef(null);
+  const itemsPerPage = 10;
 
+  // ✅ Fetch fines
   useEffect(() => {
     fetchFines();
   }, []);
 
+  // ✅ Search filter
   useEffect(() => {
-    // Filter fines by search term
     const term = searchTerm.toLowerCase();
     const filtered = fines.filter(
       (fine) =>
@@ -40,8 +43,8 @@ const Fine = () => {
     setCurrentPage(1);
   }, [searchTerm, fines]);
 
+  // ✅ Dropdown click outside
   useEffect(() => {
-    // Close dropdown when click outside
     const handleClickOutside = (event) => {
       if (
         sortDropdownRef.current &&
@@ -54,6 +57,7 @@ const Fine = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ✅ Fetch data
   const fetchFines = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/fines");
@@ -66,6 +70,7 @@ const Fine = () => {
     }
   };
 
+  // ✅ Sort by date
   const handleSort = (order) => {
     setSortOrder(order);
     setSortDropdownOpen(false);
@@ -78,7 +83,20 @@ const Fine = () => {
     setCurrentPage(1);
   };
 
-  // Pagination
+  // ✅ Delete fine
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this fine?")) return;
+
+    try {
+      await axios.delete(`http://localhost:8080/api/fines/${id}`);
+      toast.success("Fine deleted successfully!");
+      fetchFines();
+    } catch (error) {
+      toast.error("Failed to delete fine!");
+    }
+  };
+
+  // ✅ Pagination
   const totalPages = Math.ceil(filteredFines.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -86,13 +104,14 @@ const Fine = () => {
 
   const handlePageChange = (page) => setCurrentPage(page);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  // ✅ Sidebar
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const handleMenuClick = (itemId) => setActiveMenuItem(itemId);
 
-  const handleMenuClick = (itemId) => {
-    setActiveMenuItem(itemId);
-  };
+  // ✅ Navigate
+  const handleAddFine = () => navigate("/penalties/create");
+  const handleDetail = (id) => navigate(`/penalties/detail/${id}`);
+  const handleEdit = (id) => navigate(`/penalties/edit/${id}`);
 
   return (
     <div className="my-project-container">
@@ -105,10 +124,12 @@ const Fine = () => {
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
         />
+
         <main className="main-content">
           <div className="fine-header">
             <h1 className="fine-title">Fine Management</h1>
           </div>
+
           <div className="fine-controls">
             <input
               type="text"
@@ -117,6 +138,7 @@ const Fine = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="fine-search-input"
             />
+
             <div className="fine-sort-dropdown-container" ref={sortDropdownRef}>
               <button
                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
@@ -146,8 +168,13 @@ const Fine = () => {
                   </button>
                 </div>
               )}
+
             </div>
+            <button onClick={handleAddFine} className="fine-add-btn">
+              + Add Fine
+            </button>
           </div>
+
           <div className="fine-table-container">
             <table className="fine-table">
               <thead>
@@ -158,6 +185,7 @@ const Fine = () => {
                   <th>Amount</th>
                   <th>Fine Date</th>
                   <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -184,11 +212,31 @@ const Fine = () => {
                           {fine.paymentStatus}
                         </span>
                       </td>
+                      <td className="fine-actions">
+                        <button
+                          className="btn-detail"
+                          onClick={() => handleDetail(fine.id)}
+                        >
+                          Detail
+                        </button>
+                        <button
+                          className="btn-edit"
+                          onClick={() => handleEdit(fine.id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn-delete"
+                          onClick={() => handleDelete(fine.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6" className="fine-no-data">
+                    <td colSpan="7" className="fine-no-data">
                       No fines found
                     </td>
                   </tr>
@@ -196,13 +244,13 @@ const Fine = () => {
               </tbody>
             </table>
           </div>
+
           {filteredFines.length > 0 && (
             <div className="fine-pagination">
               <button
                 onClick={() => handlePageChange(1)}
                 disabled={currentPage === 1}
                 className="fine-btn-page"
-                title="First page"
               >
                 &lt;&lt;
               </button>
@@ -210,7 +258,6 @@ const Fine = () => {
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 className="fine-btn-page"
-                title="Previous page"
               >
                 &lt;
               </button>
@@ -221,7 +268,6 @@ const Fine = () => {
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 className="fine-btn-page"
-                title="Next page"
               >
                 &gt;
               </button>
@@ -229,7 +275,6 @@ const Fine = () => {
                 onClick={() => handlePageChange(totalPages)}
                 disabled={currentPage === totalPages}
                 className="fine-btn-page"
-                title="Last page"
               >
                 &gt;&gt;
               </button>

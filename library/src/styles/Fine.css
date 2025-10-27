@@ -1,26 +1,70 @@
+/*Trải nghiệm AI ngay trong các ứng dụng bạn yêu thích … Dùng Gemini để tạo bản nháp và tinh chỉnh nội dung, đồng thời sử dụng Gemini Pro để khai thác AI thế hệ mới của Google với giá 489.000 ₫ 0 ₫ cho 1 tháng
+/* =========================
+   Fine Management Page
+========================= */
 .fine-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
-  padding: 0 0 10px 0;
+  padding-bottom: 10px;
   border-bottom: 2px solid #e0e0e0;
 }
 
 .fine-title {
   color: #093765;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 600;
   margin: 0;
 }
 
-.fine-controls {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap;
+/* ✅ Nút Add Fine - thẳng hàng và màu xanh lá */
+.fine-add-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
+.fine-add-btn:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Search + Sort + Add Fine Controls
+========================= */
+.fine-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+}
+
+/* Search box */
+.fine-search-input {
+  flex: 1;
+  min-width: 260px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.fine-search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* Sort dropdown */
 .fine-sort-dropdown-container {
   position: relative;
 }
@@ -37,6 +81,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: all 0.2s ease;
 }
 
 .fine-sort-dropdown:hover {
@@ -55,7 +100,7 @@
 
 .fine-sort-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 110%;
   left: 0;
   background-color: white;
   border: 1px solid #ddd;
@@ -63,7 +108,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   min-width: 200px;
   z-index: 100;
-  margin-top: 5px;
 }
 
 .fine-sort-dropdown-menu button {
@@ -75,8 +119,16 @@
   cursor: pointer;
   font-size: 14px;
   text-align: left;
+  transition: all 0.2s ease;
 }
 
+.fine-sort-dropdown-menu button:hover {
+  background-color: #f8f9fa;
+}
+
+/* =========================
+   Table
+========================= */
 .fine-table-container {
   background: white;
   border-radius: 6px;
@@ -104,6 +156,9 @@
   font-weight: 600;
 }
 
+/* =========================
+   Pagination
+========================= */
 .fine-pagination {
   display: flex;
   justify-content: center;
@@ -119,6 +174,11 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fine-btn-page:hover {
+  background-color: #0056b3;
 }
 
 .fine-page-info {
