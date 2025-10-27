@@ -233,7 +233,8 @@
 
 .books-card-author strong,
 .books-card-info strong,
-.books-card-quantity strong {
+.books-card-quantity strong,
+.books-card-price strong {
   color: #093765;
   font-weight: 600;
 }
@@ -242,6 +243,13 @@
   color: #007bff;
   font-weight: 600;
   font-size: 15px;
+}
+
+.books-card-price {
+  font-size: 14px;
+  color: #28a745;
+  margin: 4px 0;
+  font-weight: 500;
 }
 
 /* Card Actions */

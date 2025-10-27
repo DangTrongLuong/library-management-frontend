@@ -25,6 +25,7 @@ const EditBook = () => {
     categoryId: "",
     nxb: "",
     quantity: 0,
+    price: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -68,6 +69,7 @@ const EditBook = () => {
         categoryId: book.categoryId,
         nxb: book.nxb || "",
         quantity: book.quantity,
+        price: book.price,
       });
       if (book.imageUrl) {
         setImagePreview(`http://localhost:8080/${book.imageUrl}`);
@@ -106,6 +108,10 @@ const EditBook = () => {
 
     if (formData.quantity < 0) {
       newErrors.quantity = "Quantity must be >= 0";
+    }
+
+    if (!formData.price || parseFloat(formData.price) <= 0) {
+      newErrors.price = "Price is required and must be positive";
     }
 
     setErrors(newErrors);
@@ -162,6 +168,7 @@ const EditBook = () => {
       formDataToSend.append("categoryId", formData.categoryId);
       formDataToSend.append("nxb", formData.nxb || "");
       formDataToSend.append("quantity", formData.quantity);
+      formDataToSend.append("price", formData.price);
 
       if (imageFile) {
         formDataToSend.append("image", imageFile);
@@ -384,6 +391,25 @@ const EditBook = () => {
                     />
                     {errors.quantity && (
                       <span className="edit-book-error">{errors.quantity}</span>
+                    )}
+                  </div>
+
+                  <div className="edit-book-group">
+                    <label>Price</label>
+                    <input
+                      type="number"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleChange}
+                      placeholder="Enter price"
+                      min="1"
+                      step="1"
+                      className={`edit-book-input ${
+                        errors.price ? "error" : ""
+                      }`}
+                    />
+                    {errors.price && (
+                      <span className="edit-book-error">{errors.price}</span>
                     )}
                   </div>
                 </div>
