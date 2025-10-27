@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { format } from "date-fns";
-import { ChevronDown } from "lucide-react";
+import { Edit, Trash2, Eye, ChevronDown } from "lucide-react";
 import NavBar from "../../components/NavBar";
 import SideBar from "../../components/SideBar";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,7 @@ const Fine = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("penalties");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [fines, setFines] = useState([]);
+  console.log(fines);
   const [filteredFines, setFilteredFines] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("desc");
@@ -22,6 +23,8 @@ const Fine = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const sortDropdownRef = useRef(null);
   const itemsPerPage = 10;
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteFineId, setDeleteFineId] = useState(null);
 
   useEffect(() => {
     fetchFines();
@@ -32,7 +35,9 @@ const Fine = () => {
     const filtered = fines.filter(
       (fine) =>
         String(fine.id).toLowerCase().includes(term) ||
-        String(fine.borrow?.id || "").toLowerCase().includes(term) ||
+        String(fine.borrowId || "")
+          .toLowerCase()
+          .includes(term) ||
         (fine.reason && fine.reason.toLowerCase().includes(term)) ||
         (fine.paymentStatus && fine.paymentStatus.toLowerCase().includes(term))
     );
@@ -42,7 +47,10 @@ const Fine = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target)) {
+      if (
+        sortDropdownRef.current &&
+        !sortDropdownRef.current.contains(event.target)
+      ) {
         setSortDropdownOpen(false);
       }
     };
@@ -53,8 +61,8 @@ const Fine = () => {
   const fetchFines = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/fines");
-      setFines(response.data);
-      setFilteredFines(response.data);
+      setFines(response.data.content || response.data);
+      setFilteredFines(response.data.content || response.data);
     } catch (error) {
       toast.error("Error fetching fines list!");
       setFines([]);
@@ -74,15 +82,28 @@ const Fine = () => {
     setCurrentPage(1);
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this fine?")) return;
+  const handleDelete = (id) => {
+    setDeleteFineId(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/fines/${id}`);
-      toast.success("Fine deleted successfully!");
+      await axios.delete(`http://localhost:8080/api/fines/${deleteFineId}`);
       fetchFines();
+      toast.success("Fine deleted successfully!");
+      setShowDeleteModal(false);
+      setDeleteFineId(null);
     } catch (error) {
-      toast.error("Failed to delete fine!");
+      console.error("Error deleting fine:", error);
+      toast.error("Cannot delete fine!");
+      setShowDeleteModal(false);
     }
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
+    setDeleteFineId(null);
   };
 
   const totalPages = Math.ceil(filteredFines.length / itemsPerPage);
@@ -129,15 +150,23 @@ const Fine = () => {
                 Sort by Fine Date {sortOrder === "asc" ? "↑" : "↓"}
                 <ChevronDown
                   size={16}
-                  className={`fine-dropdown-icon ${sortDropdownOpen ? "open" : ""}`}
+                  className={`fine-dropdown-icon ${
+                    sortDropdownOpen ? "open" : ""
+                  }`}
                 />
               </button>
               {sortDropdownOpen && (
                 <div className="fine-sort-dropdown-menu">
-                  <button className="fine-sort-option" onClick={() => handleSort("asc")}>
+                  <button
+                    className="fine-sort-option"
+                    onClick={() => handleSort("asc")}
+                  >
                     Fine Date (Oldest-Newest)
                   </button>
-                  <button className="fine-sort-option" onClick={() => handleSort("desc")}>
+                  <button
+                    className="fine-sort-option"
+                    onClick={() => handleSort("desc")}
+                  >
                     Fine Date (Newest-Oldest)
                   </button>
                 </div>
@@ -154,6 +183,8 @@ const Fine = () => {
                 <tr>
                   <th>ID</th>
                   <th>Borrow ID</th>
+                  <th>Reader</th>
+                  <th>Book</th>
                   <th>Reason</th>
                   <th>Amount</th>
                   <th>Fine Date</th>
@@ -166,25 +197,57 @@ const Fine = () => {
                   currentFines.map((fine) => (
                     <tr key={fine.id}>
                       <td>{fine.id}</td>
-                      <td>{fine.borrow?.id || "No Borrow ID"}</td>
-                      <td>{fine.reason}</td>
-                      <td>${fine.amount}</td>
-                      <td>{fine.fineDate ? format(new Date(fine.fineDate), "dd/MM/yyyy HH:mm") : ""}</td>
+                      <td>{fine.borrowId}</td>
+                      <td>{fine.readerName}</td>
+                      <td>{fine.bookTitle}</td>
+                      <td>{fine.reasonDescription}</td>
+                      <td>{fine.amount} VND</td>
                       <td>
-                        <span className={`badge ${fine.paymentStatus === "PAID" ? "bg-success" : "bg-danger"}`}>
-                          {fine.paymentStatus}
+                        {fine.fineDate
+                          ? format(new Date(fine.fineDate), "dd/MM/yyyy HH:mm")
+                          : ""}
+                      </td>
+                      <td>
+                        <span
+                          className={`badge ${
+                            fine.paymentStatus === "PAID"
+                              ? "bg-success"
+                              : "bg-danger"
+                          }`}
+                        >
+                          {fine.paymentStatusDescription}
                         </span>
                       </td>
                       <td className="fine-actions">
-                        <button className="btn-detail" onClick={() => handleDetail(fine.id)}>Detail</button>
-                        <button className="btn-edit" onClick={() => handleEdit(fine.id)}>Edit</button>
-                        <button className="btn-delete" onClick={() => handleDelete(fine.id)}>Delete</button>
+                        <button
+                          className="btn btn-edit-fine"
+                          title="Edit"
+                          onClick={() => handleEdit(fine.id)}
+                        >
+                          <Edit size={20} className="menu-action-fine-icon" />
+                        </button>
+                        <button
+                          className="btn btn-delete-fine"
+                          title="Delete"
+                          onClick={() => handleDelete(fine.id)}
+                        >
+                          <Trash2 size={20} className="menu-action-fine-icon" />
+                        </button>
+                        <button
+                          className="btn btn-detail-fine"
+                          title="Detail"
+                          onClick={() => handleDetail(fine.id)}
+                        >
+                          <Eye size={20} className="menu-action-fine-icon" />
+                        </button>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="fine-no-data">No fines found</td>
+                    <td colSpan="9" className="fine-no-data">
+                      No fines found
+                    </td>
                   </tr>
                 )}
               </tbody>
@@ -193,19 +256,60 @@ const Fine = () => {
 
           {filteredFines.length > 0 && (
             <div className="fine-pagination">
-              <button onClick={() => handlePageChange(1)} disabled={currentPage === 1} className="fine-btn-page">
+              <button
+                onClick={() => handlePageChange(1)}
+                disabled={currentPage === 1}
+                className="fine-btn-page"
+              >
                 &lt;&lt;
               </button>
-              <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="fine-btn-page">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="fine-btn-page"
+              >
                 &lt;
               </button>
-              <span className="fine-page-info">Page {currentPage} / {totalPages}</span>
-              <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="fine-btn-page">
+              <span className="fine-page-info">
+                Page {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="fine-btn-page"
+              >
                 &gt;
               </button>
-              <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} className="fine-btn-page">
+              <button
+                onClick={() => handlePageChange(totalPages)}
+                disabled={currentPage === totalPages}
+                className="fine-btn-page"
+              >
                 &gt;&gt;
               </button>
+            </div>
+          )}
+
+          {showDeleteModal && (
+            <div className="modal-overlay-fine">
+              <div className="modal-content-fine">
+                <h2>Confirm Delete</h2>
+                <p>Are you sure you want to delete this fine?</p>
+                <div className="modal-buttons-fine">
+                  <button
+                    onClick={confirmDelete}
+                    className="modal-btn-confirm-fine"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={cancelDelete}
+                    className="modal-btn-cancel-fine"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </main>

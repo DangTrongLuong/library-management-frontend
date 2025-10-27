@@ -16,6 +16,16 @@
   border-bottom: 2px solid #e0e0e0;
 }
 
+.status-paid {
+  color: #28a745; /* xanh lá */
+  font-weight: 600;
+}
+
+.status-unpaid {
+  color: #dc3545 !important; /* đỏ */
+  font-weight: 600;
+}
+
 .detail-fine-h1 {
   margin: 0;
   font-size: 28px;

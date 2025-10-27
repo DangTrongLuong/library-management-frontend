@@ -197,14 +197,14 @@ const DetailBook = () => {
                 <div className="detail-book-info-item">
                   <DollarSign size={20} className="detail-book-icon" />
                   <span className="detail-book-label">Price:</span>
-                  <span className="detail-book-value">${book.price}</span>
+                  <span className="detail-book-value">{book.price} VND</span>
                 </div>
 
                 <div className="detail-book-info-item">
                   <Wallet size={20} className="detail-book-icon" />
                   <span className="detail-book-label">Total Price:</span>
                   <span className="detail-book-value">
-                    ${book.price * book.quantity}
+                    {book.price * book.quantity} VND
                   </span>
                 </div>
               </div>
