@@ -1,0 +1,258 @@
+/* Detail Report Wrapper */
+.detail-report-wrapper {
+  width: 1100px;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+/* Header */
+.detail-header-report {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.detail-report-h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #093765;
+  font-weight: 600;
+}
+
+.detail-btn-back-report {
+  padding: 8px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-btn-back-report:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+/* Detail Container */
+.detail-container-report {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card Styles */
+.detail-card-report {
+  background-color: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.detail-card-report:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.detail-card-title-report {
+  font-size: 18px;
+  font-weight: 600;
+  color: #093765;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+}
+
+/* Grid & Items */
+.detail-grid-report {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.detail-full-width-report {
+  grid-column: 1 / -1;
+}
+
+.detail-item-report {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item-report label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #093765;
+}
+
+.detail-item-report p {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.detail-notes-report {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.detail-meta-report {
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-icon-report {
+  color: #007bff;
+}
+
+/* Action Buttons */
+.detail-actions-report {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 100%;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.detail-btn-edit-report {
+  background-color: #ffc107;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.detail-btn-edit-report:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}
+
+.detail-btn-back-action-report {
+  background-color: #6c757d;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.detail-btn-back-action-report:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* Responsive Tablet */
+@media (max-width: 768px) {
+  .detail-report-wrapper {
+    padding: 15px;
+  }
+
+  .detail-report-h1 {
+    font-size: 24px;
+  }
+
+  .detail-card-report {
+    padding: 20px;
+  }
+
+  .detail-grid-report {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-actions-report {
+    flex-direction: column;
+  }
+
+  .detail-btn-edit-report,
+  .detail-btn-back-action-report {
+    width: 100%;
+  }
+}
+
+/* Responsive Mobile */
+@media (max-width: 480px) {
+  .detail-report-wrapper {
+    padding: 10px;
+  }
+
+  .detail-header-report {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .detail-report-h1 {
+    font-size: 20px;
+  }
+
+  .detail-btn-back-report {
+    padding: 6px 10px;
+  }
+
+  .detail-card-report {
+    padding: 15px;
+  }
+
+  .detail-card-title-report {
+    font-size: 16px;
+  }
+
+  .detail-item-report label {
+    font-size: 12px;
+  }
+
+  .detail-item-report p {
+    font-size: 14px;
+  }
+
+  .detail-actions-report {
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .detail-btn-edit-report,
+  .detail-btn-back-action-report {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 100%;
+  }
+}
+
+.detail-btn-export-report {
+  margin-left: auto;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-btn-export-report:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}

@@ -23,13 +23,6 @@ const SideBar = ({ activeItem, onItemClick, isOpen, onClose }) => {
 
   const menuItems = [
     {
-      id: "home",
-      icon: Home,
-      label: "Home",
-      hasSubmenu: true,
-      path: "/dashboard",
-    },
-    {
       id: "books",
       icon: Book,
       label: "Books",
