@@ -25,7 +25,10 @@ import Fine from "./pages/Fine/Fine";
 import CreateFine from "./pages/Fine/CreateFine";
 import EditFine from "./pages/Fine/EditFine";
 import DetailFine from "./pages/Fine/DetailsFine";
-import Report from "./pages/Report";
+import Report from "./pages/Report/Report";
+import CreateReport from "./pages/Report/CreateReport";
+import DetailReport from "./pages/Report/DetailReport";
+import EditReport from "./pages/Report/EditReport";
 import LoginPage from "./pages/Login/Login";
 import { ProtectedRoute } from "./middlewares/ProtectedRoute";
 
@@ -209,48 +212,73 @@ const App = () => {
             }
           />
           {/* Fine (Khoản phạt) */}
-{/* Fine (Khoản phạt) */}
-<Route
-  path="/penalties"
-  element={
-    <ProtectedRoute>
-      <Fine />
-    </ProtectedRoute>
-  }
-/>
+          {/* Fine (Khoản phạt) */}
+          <Route
+            path="/penalties"
+            element={
+              <ProtectedRoute>
+                <Fine />
+              </ProtectedRoute>
+            }
+          />
 
-<Route
-  path="/penalties/create"
-  element={
-    <ProtectedRoute>
-      <CreateFine />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/penalties/edit/:id"
-  element={
-    <ProtectedRoute>
-      <EditFine />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/penalties/detail/:id"
-  element={
-    <ProtectedRoute>
-      <DetailFine />
-    </ProtectedRoute>
-  }
-/>
-
-
+          <Route
+            path="/penalties/create"
+            element={
+              <ProtectedRoute>
+                <CreateFine />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/penalties/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditFine />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/penalties/detail/:id"
+            element={
+              <ProtectedRoute>
+                <DetailFine />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/reports"
             element={
               <ProtectedRoute>
                 <Report />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/reports/createReport"
+            element={
+              <ProtectedRoute>
+                <CreateReport />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/reports/detailReport/:id"
+            element={
+              <ProtectedRoute>
+                <DetailReport />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/reports/editReport/:id"
+            element={
+              <ProtectedRoute>
+                <EditReport />
               </ProtectedRoute>
             }
           />
